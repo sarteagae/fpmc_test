@@ -2978,7 +2978,7 @@ double dsigma_f(double s, double theta)
 }
 
 
-double dsigma(double s, double theta,int exclude_loop)
+double dsigma_ZZ(double s, double theta,int exclude_loop)
 {
      double coeff_W=1;
      double coeff_f=1;
