@@ -300,7 +300,7 @@ C ... Check NFLUX / TYPINT compatibility
       IF(TYPINT.NE.'QED') THEN
         IF(TYPINT.NE.'QCD') THEN
         PRINT*, ' '
-        PRINT*, ' FPMC - You requested ilegal type of interaction '
+        PRINT*, ' FPMC - You requested illegal type of interaction '
         PRINT*, '         TYPINT = ', TYPINT
         PRINT*, ' TYPINT should be set to QCD/QED '
         PRINT*, ' '
@@ -314,7 +314,7 @@ C ... Check NFLUX / TYPINT compatibility
       IF(TYPEPR.NE.'INC') THEN
          IF(TYPEPR.NE.'EXC') THEN
         PRINT*, ' '
-        PRINT*, ' FPMC - You requested ilegal type of production '
+        PRINT*, ' FPMC - You requested illegal type of production '
         PRINT*, '         TYPEPR = ', TYPEPR
         PRINT*, ' TYPEPR should be set to INC/EXC '
         PRINT*, ' '
@@ -580,8 +580,21 @@ C--M.S exclusive diphoton production
          ENDIF
 
          IF(AAEXOTIC.EQ.0)THEN
+           IF(IPROC.EQ.16075)THEN
+            PRINT*, ' - - - - - - - - - FPMC - - - - - - - - - '
+            PRINT *, ' '
+            PRINT *, 'G.von Gersdorff and S.Fichet ME used for 
+     &      AA->ttbar '
+            PRINT *, 'with anomalous coupling'
+            PRINT *, 'Anomalous coupling parameters set to:'
+            PRINT *, '   XI1TTBAR  = ', XI1TTBAR
+            PRINT *, '   XI2TTBAR  = ', XI2TTBAR
+            PRINT *, '   XI3TTBAR  = ', XI3TTBAR
+            PRINT *, '   XI4TTBAR  = ', XI4TTBAR
+            PRINT *, '   XI5TTBAR  = ', XI5TTBAR
+            PRINT *, '   XI6TTBAR  = ', XI6TTBAR
+           ENDIF
          ELSEIF(AAEXOTIC.EQ.1)THEN
-            PRINT *, 'EXOTICS FOR EXCL AAAA'
            IF( IPROC.LT.16063.AND.IPROC.GT.16065) THEN
             PRINT*, ' '
             PRINT*, ' FPMC - Exotic AAAA coupling available '
@@ -3626,6 +3639,10 @@ c ... M.S.      : HQ=60,61,62,63,64,65 SM AA + AAANOM=3 def
             HQ=13 !AA->GluGlu, C Baldenegro
             AAANOM=3 !Enters M.S. SQME calls
           ENDIF
+          IF (HQ.EQ.75) THEN
+            HQ=6 !Top quark, A. Bellora
+            AAANOM=3 !Enters M.S. SQME calls
+          ENDIF
           IF (HQ.EQ.127) HQ=198
           IF (HQ.GE.21.AND.HQ.LE.26) THEN
             HQ=HQ+400-20
@@ -3657,7 +3674,8 @@ C Kinematics
            COSTH=(T-U)/(BE*S)
            EMSCA=SQRT(2.*S*T*U/(S*S+T*T+U*U))
 C Cross-sections
-        IF (HQ.NE.198.AND.HQ.NE.200.AND.HQ.NE.142.AND.HQ.NE.59) THEN
+        IF (HQ.NE.198.AND.HQ.NE.200.AND.HQ.NE.142.AND.HQ.NE.59
+     &    .AND.HQ.NE.6) THEN
 C --- Begin modif by Tibor Kucs 08/14/2003
 C     Updated by Maarten Boonekamp 11/03/2003
 c ... If QED use the original implementation :
@@ -3686,7 +3704,7 @@ c ...... gg -> qq
                 BESQ=1d0-4*XMSQ/S
                 XSQQ(IFLAVR) = TFACT*XMSQ/S/ETSQ**2*BESQ
                 SGGQQ=SGGQQ+XSQQ(IFLAVR)
-                ELSEIF(IFLAVR.GE.401.AND.IFLAVR.LE.406) THEN
+              ELSEIF(IFLAVR.GE.401.AND.IFLAVR.LE.406) THEN
                 XSQQ(IFLAVR) = 2*TFACT*XMSQ**2/S**2/ETSQ**2
                 SGGQQ=SGGQQ+XSQQ(IFLAVR)
               ENDIF
@@ -3740,6 +3758,7 @@ c ...... Total
      &              ' - STOP'
           STOP
         ENDIF
+
       ELSE
 
 c O.K. 01/11/2007 modified to include call to O'Mega matrix
@@ -3751,7 +3770,6 @@ c               FACTR=-GEV2NB*2*LOG(TMAX/TMIN)*MAX(T,U)
 c     $         *6*PIFAC*CFAC*ALPHEM**2/S**2
 c     $         *(1-S/(T*U)*(4D0/3*S+2*EMSQ)
 c     $         +(S/(T*U))**2*(2D0/3*S**2+2*EMSQ**2))
-
           IF(AAANOM.EQ.0)THEN
           ! original herwig formula
             FACTR=-GEV2NB*2*LOG(TMAX/TMIN)*MAX(T,U)
@@ -3897,6 +3915,12 @@ c ... According to the convention of O.K. for ZZ final states
               call resonances0even_sqme_az_c(AMP2, S, T, 1, 0,
      $        AAM, AAF0, AAF0ZG, AAW, AAA2)
               ENDIF
+c ... A.B. Calling anomalous ttbar production AA->ttbar 08-2020            
+              IF(HQ.EQ.6.AND.IPROC.EQ.16075) THEN
+              CALL eft_sqme_aattbar_c(AMP2, S, T,
+     $        XI1TTBAR,XI2TTBAR,XI3TTBAR,
+     $        XI4TTBAR,XI5TTBAR,XI6TTBAR, RMASS(6))
+              ENDIF
 c ... C.B. Calling GluGlu production (Spin0even resonance) AA->Dijet 05-2016
               IF(HQ.EQ.13.AND.IPROC.EQ.16070) THEN
               call resonances0even_sqme_gluglu_c(AMP2, S, T, 1, 0,
@@ -3911,7 +3935,7 @@ c ... C.B. Calling Higgs-Higgs production (Spin0even resonance) AA->Dijet 05-201
               call eft_sqme_aaaz_c(AMP2, S, T, 1, A1A, A2A, ANOMCUTOFF)
               ENDIF
 
-             FACTR=-GEV2NB*2*LOG(TMAX/TMIN)*MAX(T,U)
+              FACTR=-GEV2NB*2*LOG(TMAX/TMIN)*MAX(T,U)
      $         *2*PIFAC/(64.*PIFAC**2)/S**2*2d0*AMP2
 
 
@@ -3971,8 +3995,9 @@ c C.B. AZ
             ENDIF
             HCS=HCS+Q**4
             IF (GENEV.AND.HCS.GT.RCS) CALL HWHQCP(ID3,ID4,1243,61,*99)
-            ENDIF
- 10      CONTINUE
+          ENDIF
+ 10     CONTINUE
+
 C ... For 'QCD' no EM charge, it is set to ONE
       ELSE
         HCS=1.
@@ -4016,6 +4041,7 @@ c---End modif by Tibor Kucs 08/14/2003
       ELSE
         CALL HWETWO
       ENDIF
+      CONTINUE
       END
 
 CDECK  ID>, HWETWO.
@@ -5537,6 +5563,12 @@ C-----------------------------------------------------------------------
       write(*,*) '          ACZ        = ',ACZ
       write(*,*) '          A1A        = ',A1A
       write(*,*) '          A2A        = ',A2A
+      write(*,*) '          XI1TTBAR   = ',XI1TTBAR
+      write(*,*) '          XI2TTBAR   = ',XI2TTBAR
+      write(*,*) '          XI3TTBAR   = ',XI3TTBAR
+      write(*,*) '          XI4TTBAR   = ',XI4TTBAR
+      write(*,*) '          XI5TTBAR   = ',XI5TTBAR
+      write(*,*) '          XI6TTBAR   = ',XI6TTBAR
       write(*,*) '          ANOMCUTOFF = ',ANOMCUTOFF
       write(*,*) '          AAEXOTIC   = ',AAEXOTIC
       write(*,*) '          AAM        = ',AAM

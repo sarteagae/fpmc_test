@@ -7,7 +7,7 @@
 //--------Coding of the exclusive aa->aa process----------//
 //--formulas from G. von Gersdorff (gersdorff@gmail.com)--// 
 //--formulas from S. Fichet  sylvain.fichet@gmail.com--)--// 
-//modification of the comphep external module used for aaww/aazz//
+//modification of the comphep external module used for aaww/aazz/aattbar //
 
 #ifdef __cplusplus /* If this is a C++ compiler, use C linkage */
 extern "C" {
@@ -27,6 +27,8 @@ extern "C" {
   void resonances2_sqme_aaaa_c_(double* _amp2, double* _s, double* _t, int* _exclude_loops_SM, int* _exclude_loops_EX, double* _m, double* _c, double* _w_c, double* _aa); //Spin2 neutral resonances
   void eft_sqme_aaaa_c_(double* _amp2, double* _s, double* _t, int* _exclude_loops_SM, double* _z1, double* _z2, double* _cutoff); //EFT limit
   void eft_sqme_aaaz_c_( double*, double*, double*, int*, double*, double*, double* );
+  void eft_sqme_aattbar_c_(double* _amp2, double* _s, double* _t,
+    double* _xi1,double* _xi2,double* _xi3,double* _xi4,double* _xi5,double* _xi6, double* _m_top); //Anomalous ttbar production
 
 #ifdef __cplusplus
 }
@@ -150,6 +152,7 @@ void eft_sqme_aaaa_c_(double* _amp2, double* _s, double* _t, int* _exclude_loops
   double fact = (*_cutoff > 0 ) ? 1/(1+pow(*_s/ *_cutoff / *_cutoff, 2)) : 1;
   *_amp2 = eft_aaaa::sqme( *_s, *_t, *_exclude_loops_SM, *_z1*fact, *_z2*fact );
 }
+#define eft_sqme_aaaa_c__ eft_sqme_aaaa_c_ //wrapper for g77
 
 /////////////////////////////////////////////////////////////////// 
 // Anomalous aaaz in the EFT limit parametrized by z1 and z2
@@ -164,5 +167,14 @@ void eft_sqme_aaaz_c_( double* _amp2, double* _s, double* _t, int* _exclude_loop
   *_amp2 = eft_aaaz::sqme( *_s, *_t, *_exclude_loops_SM, *_z1*fact, *_z2*fact );
 }
 
-#define eft_sqme_aaaa_c__ eft_sqme_aaaa_c_ //wrapper for g77
-
+/////////////////////////////////////////////////////////////////// 
+// Anomalous aattbar in the EFT limit parametrized by xi1-xi6
+// including interferences with SM 
+//////////////////////////////////////////////////////////////////// 
+namespace eft_aattbar { extern double sqme(double* _s, double* _t,
+    double* _xi1,double* _xi2,double* _xi3,double* _xi4,double* _xi5,double* _xi6, double* _m_top); }
+void eft_sqme_aattbar_c_(double* _amp2, double* _s, double* _t,
+    double* _xi1,double* _xi2,double* _xi3,double* _xi4,double* _xi5,double* _xi6, double* _m_top) {
+  *_amp2 = eft_aattbar::sqme(_s, _t, _xi1, _xi2, _xi3, _xi4, _xi5, _xi6, _m_top);
+}
+#define eft_sqme_aattbar_c__ eft_sqme_aattbar_c_ //wrapper for g77
