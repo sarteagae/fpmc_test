@@ -2978,7 +2978,7 @@ double dsigma_f(double s, double theta)
 }
 
 
-double dsigma_ZZ(double s, double theta,int exclude_loop)
+double dsigma_ZZ(double s, double t,int exclude_loop)
 {
      double coeff_W=1;
      double coeff_f=1;
@@ -3004,7 +3004,7 @@ double dsigma_ZZ(double s, double theta,int exclude_loop)
 
      double beta=pow(1-4*mZ2/(s+0.00001),0.5);
      //printf(" masse %lf\n",mq);
-     double t=mZ2-s/2*(1-pow(1-4*mZ2/(s+0.0001),0.5)*cos(Pi*theta/180.0));
+     //double t=mZ2-s/2*(1-pow(1-4*mZ2/(s+0.0001),0.5)*cos(Pi*theta/180.0));
      double u=2*mZ2-s-t;
      
 
