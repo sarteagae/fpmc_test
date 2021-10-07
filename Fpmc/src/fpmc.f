@@ -3903,6 +3903,19 @@ C ... M.S. Calling SM and EXOTIC exclusive photon pair production
      $        AAM, AAF0, AAF0H, AAW, AAA2)
               HQ=200 !Z ID
               ENDIF
+	      
+c ...WdA and CB Calling SM  exclusive Zpair production
+	      IF(HQ.EQ.85.AND.IPROC.EQ.16085) THEN
+	      call sm_sqme_aazz_c(AMP2, S, T, 1)
+	      HQ = 200 ! this is to reassign the HQ to 200 for the Z boson.
+	      ENDIF
+	      IF (HQ.EQ.200.AND.IPROC.EQ.16085) THEN
+  	      ID4=200 !ID4=200 is Z boson, ID3 is fixed to ID3 = 200
+  	      Q=1
+	      ENDIF
+	      
+	      
+	      
 c ... C.B. Calling exclusive WW production (Spin0even resonance) AA->WW 05-2016
 c ... According to the convention of O.K. for WW final states
               IF(HQ.EQ.198.AND.IPROC.EQ.16068) THEN
