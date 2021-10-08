@@ -14,6 +14,7 @@ extern "C" {
 #endif
   // routines called by fpmc 
 
+  void sm_sqme_aazz_c_(double* _amp2, double* _s, double* _t, int* _exclude_loops); //SM
   void sm_sqme_aaaa_c_(double* _amp2, double* _s, double* _t, int* _exclude_loops); //SM
   void bsmf_sqme_aaaa_c_(double* _amp2, double* _s, double* _t, int* _exclude_loops_SM, int* _exclude_loops_EX, double* _m, double* _q, double* _n); //Exotic fermions
   void bsmv_sqme_aaaa_c_(double* _amp2, double* _s, double* _t, int* _exclude_loops_SM, int* _exclude_loops_EX, double* _m, double* _q, double* _n); //Exotic vectors
