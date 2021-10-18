@@ -3044,24 +3044,6 @@ double dsigma_ZZ(double s, double t,int exclude_loop)
 
 
 
-int main()
-{
-    //double efe=reAvf_pppp(80000.0001, -20000.0001, -24000.0001, 10000.0001);
-    double x;
-   
-    for (x=0;x<401;x++)
-    {
-    	//printf(" %lf\n",dsigma_f((200+15*x)*(200+15*x)+0.0001,30.0)/(alpha*alpha));
-        printf(" %lf\n",pow(10,10)*dsigma((200+15*x)*(200+15*x)+0.0001,30.0,2));
- 
-    }
-    
-    //printf("\n ok %lf \n",efe);
-
-    return 0;
-}
-
-
 
 
 
