@@ -296,24 +296,24 @@ double im_log_dut(double eps,double x)//eps is a small param and x is a real one
 //functions Passarino Veltman
 
 
-double ReB(double sm)
+double ReB1(double sm)
 {   
     return -reb(sm) * re_logz(sm) + imb(sm) * im_logz(sm);
 }
 
-double ImB(double sm)
+double ImB1(double sm)
 {   
     return -reb(sm) * im_logz(sm) - imb(sm) * re_logz(sm);
 }
 
 double ReBz(double sm, double m2)
 {
-    return ReB(sm) - ReB(mZ2/(4.0*m2));
+    return ReB1(sm) - ReB1(mZ2/(4.0*m2));
 }
 
 double ImBz(double sm, double m2)
 {
-    return  ImB(sm) - ImB(mZ2/(4.0*m2));
+    return  ImB1(sm) - ImB1(mZ2/(4.0*m2));
 }
 
 
