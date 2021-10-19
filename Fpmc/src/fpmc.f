@@ -3617,7 +3617,7 @@ c ... O.K. : HQ=15 ZZ
 c ... M.S./O.K. : HQ=16 AA
 c ... M.S.      : HQ=60,61,62,63,64,65 SM AA + AAANOM=3 def
           IF (HQ.GT.6.AND.HQ.LE.10) HQ=2*HQ+107
-          IF (HQ.EQ.67.OR.HQ.EQ.73) THEN
+          IF (HQ.EQ.67.OR.HQ.EQ.73.OR.HQ.EQ.85) THEN
             HQ=142 !ZZ
             AAANOM=3 !Enters M.S. section
           ENDIF
@@ -3905,14 +3905,14 @@ C ... M.S. Calling SM and EXOTIC exclusive photon pair production
               ENDIF
 	      
 c ...WdA and CB Calling SM  exclusive Zpair production
-	      IF(HQ.EQ.85.AND.IPROC.EQ.16085) THEN
+	      IF(HQ.EQ.142.AND.IPROC.EQ.16085) THEN
 	      call sm_sqme_aazz_c(AMP2, S, T, 1)
 	      HQ = 200 ! this is to reassign the HQ to 200 for the Z boson.
 	      ENDIF
-	      IF (HQ.EQ.200.AND.IPROC.EQ.16085) THEN
-  	      ID4=200 !ID4=200 is Z boson, ID3 is fixed to ID3 = 200
-  	      Q=1
-	      ENDIF
+	      c ...IF (HQ.EQ.200.AND.IPROC.EQ.16085) THEN
+  	      c ...ID4=200 !ID4=200 is Z boson, ID3 is fixed to ID3 = 200
+  	      c ...Q=1
+	      c ...ENDIF
 	      
 	      
 	      
