@@ -3909,10 +3909,7 @@ c ...WdA and CB Calling SM  exclusive Zpair production
 	      call sm_sqme_aazz_c(AMP2, S, T, 1)
 	      HQ = 200 ! this is to reassign the HQ to 200 for the Z boson.
 	      ENDIF
-	      c ...IF (HQ.EQ.200.AND.IPROC.EQ.16085) THEN
-  	      c ...ID4=200 !ID4=200 is Z boson, ID3 is fixed to ID3 = 200
-  	      c ...Q=1
-	      c ...ENDIF
+	      
 	      
 	      
 	      
