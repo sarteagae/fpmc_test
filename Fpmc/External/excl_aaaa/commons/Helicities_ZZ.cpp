@@ -2980,6 +2980,14 @@ double dsigma_f(double s, double theta)
 
 double dsigma_ZZ(double s, double t,int exclude_loop)
 {
+     if (s<4*mZ2)
+     {
+          return 0;
+     }
+     if (t>0)
+     {
+          return 0;
+     }
      double coeff_W=1;
      double coeff_f=1;
      double coeff_exotic_f=0;
@@ -3039,7 +3047,7 @@ double dsigma_ZZ(double s, double t,int exclude_loop)
      double sum_Y=F2_ppp0+F2_ppp0_mbeta+F2_pmp0+F2_pmp0_mbeta +F2_ppp0_u+F2_ppp0_mbeta_u+F2_pmp0_u+F2_pmp0_mbeta_u;
 
      double sum=beta/(128.0*s*Pi)*(2*sum_X+2*sum_Z+2*sum_Y);
-     return 1;
+     return sum;
 }
 
 
