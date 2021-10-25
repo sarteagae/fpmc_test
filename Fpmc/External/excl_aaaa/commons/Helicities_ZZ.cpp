@@ -2992,6 +2992,10 @@ double dsigma_ZZ(double s, double t,int exclude_loop)
      {
           return 0;
      }
+     if (t*(2*mZ2-s-t)<mZ2*mZ2)
+     {
+          return 0;
+     }
      double coeff_W=1;
      double coeff_f=1;
      double coeff_exotic_f=0;
