@@ -3906,7 +3906,7 @@ C ... M.S. Calling SM and EXOTIC exclusive photon pair production
 	      
 c ...WdA and CB Calling SM  exclusive Zpair production
 	      IF(HQ.EQ.142.AND.IPROC.EQ.16085) THEN
-	      call sm_sqme_aazz_c(AMP2, S, T, 1)
+	      call sm_sqme_aazz_c(AMP2, S, T, 0)
 	      HQ = 200 ! this is to reassign the HQ to 200 for the Z boson.
 	      PRINT*, ' - - - -Calcul en cours - - - - - ', AMP2
 	      ENDIF
