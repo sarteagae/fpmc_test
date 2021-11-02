@@ -7,9 +7,9 @@ IPROC       16060
 NFLUX       23
 NRN1        17673
 NRN2        63565
-PTMIN       2.5
-YWWMIN      0.
-YWWMAX      1.
+PTMIN       50
+YWWMIN      0.001
+YWWMAX      0.1
 ISOFTM      0
 IAION       208
 IZION       82
