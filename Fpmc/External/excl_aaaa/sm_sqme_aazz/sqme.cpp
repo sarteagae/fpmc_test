@@ -1,7 +1,7 @@
 #include<iostream>
 #include<fstream>
 #include<math.h>
-#include"Helicities_ZZ .h"
+#include"Helicities_ZZ.h"
 using namespace std;
 
 namespace sm_aazz {
