@@ -3869,8 +3869,8 @@ c           IF (HWRGEN(2).GT.HALF) then
 
 C ... M.S. Calling SM and EXOTIC exclusive photon pair production
               IF(HQ.EQ.59.AND.IPROC.EQ.16060) THEN
-              call sm_sqme_aaaa_c(AMP2, S, T, 0)
-C ...	      call sm_sqme_aazz_c(AMP2, S, T, 0)
+c ...         call sm_sqme_aaaa_c(AMP2, S, T, 0)
+	      call sm_sqme_aazz_c(AMP2, S, T, 0)
               ENDIF
               IF(HQ.EQ.59.AND.IPROC.EQ.16061) THEN
               call sm_sqme_aaaa_c(AMP2, S, T, 1)
