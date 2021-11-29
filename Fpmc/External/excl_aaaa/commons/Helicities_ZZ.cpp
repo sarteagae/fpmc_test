@@ -2980,6 +2980,11 @@ double dsigma_f(double s, double theta)
 
 double dsigma_ZZ(double s, double t,int exclude_loop)
 {
+     if (s/(4mZ2)>100)
+     {
+          return 0;
+     }
+     
      if (s<4*mZ2)
      {
           return 0;
