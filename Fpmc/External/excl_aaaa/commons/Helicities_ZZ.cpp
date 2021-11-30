@@ -2980,7 +2980,7 @@ double dsigma_f(double s, double theta)
 
 double dsigma_ZZ(double s, double t,int exclude_loop)
 {
-     if (s/(4*mZ2)>50)
+     if (s/(4*mZ2)>100000)
      {
           return 0;
      }
@@ -2989,11 +2989,11 @@ double dsigma_ZZ(double s, double t,int exclude_loop)
      {
           return 0;
      }
-     if (t>0)
+     if (t>-mZ2)
      {
           return 0;
      }
-     if (2*mZ2-s-t>0)
+     if (2*mZ2-s-t>-mZ2)
      {
           return 0;
      }
