@@ -2990,19 +2990,19 @@ double dsigma_ZZ(double s, double t,int exclude_loop)
           return 0;
      }
      double beta=pow(1-4*mZ2/(s+0.00001),0.5);
-     if (t>-mZ2)          //mZ2-s/2.*(1-beta)
+     if (t>mZ2-s/2.*(1-beta))          //mZ2-s/2.*(1-beta)
      {
           return 0;
      }
-     if (t<-2*mZ2)       //mZ2-s/2.*(1+beta)
+     if (t<mZ2-s/2.*(1+beta))       //mZ2-s/2.*(1+beta)
      {
           return 0;
      }
-     if (2*mZ2-s-t>-mZ2)
+     if (2*mZ2-s-t>mZ2-s/2.*(1-beta))
      {
           return 0;
      }
-     if (2*mZ2-s-t<-2*mZ2)
+     if (2*mZ2-s-t<mZ2-s/2.*(1+beta))
      {
           return 0;
      }
