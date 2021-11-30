@@ -3024,7 +3024,7 @@ double dsigma_ZZ(double s, double t,int exclude_loop)
          coeff_Higgs=0;
      }
 
-     double beta=pow(1-4*mZ2/(s+0.00001),0.5);
+     //double beta=pow(1-4*mZ2/(s+0.00001),0.5);
      //printf(" masse %lf\n",mq);
      //double t=mZ2-s/2*(1-pow(1-4*mZ2/(s+0.0001),0.5)*cos(Pi*theta/180.0));
      double u=2*mZ2-s-t;
