@@ -3036,7 +3036,6 @@ double dsigma_ZZ(double s, double t,int exclude_loop)
      //printf(" masse %lf\n",mq);
      //double t=mZ2-s/2*(1-pow(1-4*mZ2/(s+0.0001),0.5)*cos(Pi*theta/180.0));
      double u=2*mZ2-s-t;
-     
 
      double F2_pppp=pow(coeff_Higgs*reFh_pppp(beta)+coeff_W*reFw_pppp(beta,t,mW2)+coeff_f*reFf_pppp_as(beta,t)+coeff_f*reFf_pppp(beta,t,Itop,Qtop,mtop2),2)+pow(coeff_Higgs*imFh_pppp(beta)+coeff_W*imFw_pppp(beta,t,mW2) +coeff_f*imFf_pppp_as(beta,t)+coeff_f*imFf_pppp(beta,t,Itop,Qtop,mtop2),2);
 
@@ -3071,9 +3070,6 @@ double dsigma_ZZ(double s, double t,int exclude_loop)
      double sum=beta/(128.0*s*Pi*100000.1)*(2*sum_X+2*sum_Z+2*sum_Y);
      return sum;
 }
-
-
-
 
 
 
