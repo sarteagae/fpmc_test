@@ -11,7 +11,7 @@ namespace sm_aazz {
 
 
 // compute the SM squared matrix element, including leptons, quarks and the W boson
-double sqme_zz(double s, double t, int exclude_loops){
+double sqme(double s, double t, int exclude_loops){
 
   return dsigma_ZZ(s,t,exclude_loops);  
 
