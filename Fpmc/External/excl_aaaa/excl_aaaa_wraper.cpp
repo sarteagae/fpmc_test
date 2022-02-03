@@ -50,7 +50,7 @@ void sm_sqme_aaaa_c_(double* _amp2, double* _s, double* _t, int* _exclude_loops)
 //////////////////////////////////////////////////////////////////// 
 namespace sm_aazz { extern double sqme(double, double, int); }
 void sm_sqme_aazz_c_(double* _amp2, double* _s, double* _t, int* _exclude_loops) {
-  *_amp2 = sm_aazz::sqme(*_s, *_t, *_exclude_loops);
+  *_amp2 = sm_aazz::sqme_zz(*_s, *_t, *_exclude_loops);
 }
 
 #define sm_sqme_aaaa_c__ sm_sqme_aaaa_c_ //wrapper for g77
