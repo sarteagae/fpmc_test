@@ -3011,7 +3011,7 @@ double dsigma_ZZ(double s, double t,int exclude_loop)
           return 0;
      }
      double coeff_W=0;
-     double coeff_f=0;
+     double coeff_f=1;
      double coeff_exotic_f=0;
      double coeff_Higgs=1;
 
