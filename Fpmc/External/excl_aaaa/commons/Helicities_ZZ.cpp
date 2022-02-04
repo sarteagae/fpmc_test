@@ -3013,7 +3013,7 @@ double dsigma_ZZ(double s, double t,int exclude_loop)
      double coeff_W=0;
      double coeff_f=0;
      double coeff_exotic_f=0;
-     double coeff_Higgs=0;
+     double coeff_Higgs=1;
 
      if (exclude_loop==1)//no W boson loop
      {
