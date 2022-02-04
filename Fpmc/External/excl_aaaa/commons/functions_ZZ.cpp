@@ -6,7 +6,7 @@
 
 const double Pi = 4 * atan(1);
 double mZ2=91.2*91.2;//Mz/(4.0*mi);
-const double epsilon=0.01;
+const double epsilon=0.0001;
 
 double reaz=4.76;
 double imaz=0;
