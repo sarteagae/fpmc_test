@@ -113,31 +113,6 @@ double ImE2(double t, double u,double m)
 
 
 
-int main()
-{
-    
-    double x;
-    //printf("%lf \n",mod(Pi+epsilon,2*Pi));
-    //printf("%lf \n",fmod(3*PI+0.5,2*PI));
-    for (x=0;x<201;x++)
-    {
-        //printf(" la valeure de ImE2 est %lf\n",10000000000*ImE2(x,1,1));
-        //printf(" %lf\n",dsigma_f(160000.00001+25*x*x,30));
-        //printf(" %lf\n",im_logz(mZ2/(4*6464.0)));//(alpha*alpha+0.0001)
-        printf(" %lf\n",pow(10,10)*ImDst(x+0.00001,-0.9*x-0.0001,6464.001));//(alpha*alpha+0.0001)
-    	
-    }
-    
-    return 0;
-}
-
-
-
-
-
-
-
-
 
 
 
