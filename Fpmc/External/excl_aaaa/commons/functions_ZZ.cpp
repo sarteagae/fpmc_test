@@ -1,3 +1,4 @@
+//#include<iostream>
 #include<math.h>
 #include <stdio.h>
 #include<gsl/gsl_sf.h>
@@ -296,24 +297,24 @@ double im_log_dut(double eps,double x)//eps is a small param and x is a real one
 //functions Passarino Veltman
 
 
-double ReB(double sm)
+double ReBntm(double sm)
 {   
     return -reb(sm) * re_logz(sm) + imb(sm) * im_logz(sm);
 }
 
-double ImB(double sm)
+double ImBntm(double sm)
 {   
     return -reb(sm) * im_logz(sm) - imb(sm) * re_logz(sm);
 }
 
 double ReBz(double sm, double m2)
 {
-    return ReB(sm) - ReB(mZ2/(4.0*m2));
+    return ReBntm(sm) - ReBntm(mZ2/(4.0*m2));
 }
 
 double ImBz(double sm, double m2)
 {
-    return  ImB(sm) - ImB(mZ2/(4.0*m2));
+    return  ImBntm(sm) - ImBntm(mZ2/(4.0*m2));
 }
 
 
@@ -508,3 +509,5 @@ double ImE2(double tm, double um, double m2)
 {
     return 2*(4*m2*tm-mZ2)*ImCz(tm,  m2)+2*(4*m2*um-mZ2)*ImCz(um, m2)-(16*m2*m2*tm*um-mZ2*mZ2)*ImDut(tm,um, m2);
 }
+
+
