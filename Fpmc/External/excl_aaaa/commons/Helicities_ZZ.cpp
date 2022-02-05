@@ -1514,15 +1514,15 @@ double ReHi(double s, double Qi, double Nci, double spin, double mi)
      double st=s/(4.*mi);
      if (spin==0)
      {
-         fi=1/st*(1+2*mi*ReC(st,mi));
+         //fi=1/st*(1+2*mi*ReC(st,mi));
      }
      else if (spin==0.5)
      {
-         fi=-2/st*(1-2*mi*(st-1)*ReC(st,mi));
+         //fi=-2/st*(1-2*mi*(st-1)*ReC(st,mi));
      }
      else if (spin==1)
      {
-         fi=1/st*(3+mh2/(2.*mi))-(16*mi-(mh2+6*mi)/st)*ReC(st,mi);
+         //fi=1/st*(3+mh2/(2.*mi))-(16*mi-(mh2+6*mi)/st)*ReC(st,mi);
      }
      else 
      {
@@ -1538,15 +1538,15 @@ double ImHi(double s, double Qi, double Nci, double spin, double mi)
      double st=s/(4*mi);
      if (spin==0)
      {
-         fi=1/st*(2*mi*ImC(st,mi));
+         //fi=1/st*(2*mi*ImC(st,mi));
      }
      else if (spin==0.5)
      {
-         fi=-2/st*(-2*mi*(st-1)*ImC(st,mi));
+         //fi=-2/st*(-2*mi*(st-1)*ImC(st,mi));
      }
      else if (spin==1)
      {
-         fi=-(16*mi-(mh2+6*mi)/st)*ImC(st,mi);
+         //fi=-(16*mi-(mh2+6*mi)/st)*ImC(st,mi);
      }
      else 
      {
