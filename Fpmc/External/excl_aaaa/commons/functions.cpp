@@ -33,11 +33,11 @@ double ImBz(double s,double m)
      }
 }
 
-double ReC(double s,double m)
+double ReC0(double s,double m)
 {
     return 1/(4.0*m*2.0*s)*(pow(log(4*s),2)-Pi*Pi);
 }
-double ImC(double s,double m)
+double ImC0(double s,double m)
 {
     return 1/(4.0*m*s)*(-Pi)*log(4*s);
 }
