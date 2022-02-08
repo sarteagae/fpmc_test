@@ -151,6 +151,15 @@ double imAs_pmpm(double beta, double t, double u, double m)
 
 
 
+
+
+
+//W amplitudes
+
+
+
+
+
 //W delat 
 double re_dw_pppm(double beta, double t, double u, double m)
 {
@@ -164,67 +173,192 @@ double im_dw_pppm(double beta, double t, double u, double m)
 double re_dw_pppp(double beta, double t, double u, double m)
 {
      double s=4*mZ2/(1-beta*beta);
+     double s2=s-2*mZ2;
+     double s4=s-4*mZ2;
+     double u1=u-mZ2;
+     double t1=t-mZ2;
+     double Y=u*t-mZ2*mZ2;
+     double delta=pow(s*mZ2/(2.0*Y),0.5);
      
-     double red=16*cW*cW*(pow(log(t/u),2)+Pi*Pi+s/u*log(-u/m)*log(-s/t)+s/t*log(-t/m)*log(-s/u));
+     double st=s/(4.0*m);
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
+     
+     double red=8*mZ2*s*beta/s4*ReC(st,m)+4*(2*cW*cW*s4*(s2+beta*s)+mZ2*(s4+beta*s))/(s*s4)*ReE2(tt,ut,m)-4*cW*cW*(2*mZ2*mZ2+(4*mW2-s)*(s2+beta*s))*ReF(st,tt,ut,m)+2*s*mZ2/s4*(s4+beta*s2)*(ReDst(st,tt,m)+ReDst(st,ut,m));
      return red;
 }
 double im_dw_pppp(double beta, double t, double u, double m)
 {
      double s=4*mZ2/(1-beta*beta);
+     double s2=s-2*mZ2;
+     double s4=s-4*mZ2;
+     double u1=u-mZ2;
+     double t1=t-mZ2;
+     double Y=u*t-mZ2*mZ2;
      
-     double imd=16*cW*cW*(-Pi*(s/u*log(-u/m)+s/t*log(-t/m)));
+     double st=s/(4.0*m);
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
+     //printf("%lf %lf %lf %lf",ut,st,tt,m);
+     double imd=0*8*mZ2*s*beta/s4*ImC(st,m)+0*4*(2*cW*cW*s4*(s2+beta*s)+mZ2*(s4+beta*s))/(s*s4)*ImE2(tt,ut,m)-4*cW*cW*(2*mZ2*mZ2+(4*mW2-s)*(s2+beta*s))*ImF(st,tt,ut,m)+0*2*s*mZ2/s4*(s4+beta*s2)*(ImDst(st,tt,m)+ImDst(st,ut,m));
+     //printf("\n imd d %lf \n",-4*cW*cW*(2*mZ2*mZ2+(4*mW2-s)*(s2+beta*s))* ImF(st,tt,ut,m));
      return imd;
 }
 
 double re_dw_pmpp(double beta, double t, double u, double m)
 {
+     double s=4*mZ2/(1-beta*beta);
+     double s2=s-2*mZ2;
+     double s4=s-4*mZ2;
+     double u1=u-mZ2;
+     double t1=t-mZ2;
+     double Y=u*t-mZ2*mZ2;
+     double delta=pow(s*mZ2/(2.0*Y),0.5);
      
-     return 0;
+     double st=s/(4.0*m);
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
+     
+     double x=u;
+     double x1=u1;
+     double xt=ut;
+     
+     double bracket_u=4*(4*mW2*(x+mZ2)*(x+mZ2)+x*s4*mZ2)/(s4*Y)*ReE1(st,xt,m)+4*mZ2*Y/s4*ReDst(st,xt,m);
+     x=t;
+     x1=t1;
+     xt=tt;
+     
+     double bracket_t=4*(4*mW2*(x+mZ2)*(x+mZ2)+x*s4*mZ2)/(s4*Y)*ReE1(st,xt,m)+4*mZ2*Y/s4*ReDst(st,xt,m);
+     
+     double red= 4*s/(s4*Y)*(s2*s4*(4*mW2-mZ2)-8*Y*mW2)*ReC(st,m)+4*(4*mW2-mZ2)*(s*s4-2*Y)/Y*ReCzz(st,m)+8*mW2*(4*mW2-mZ2+2*Y/s4)*ReF(st,tt,ut,m)+(bracket_t+bracket_u);
+     return red;
 }
 
 double im_dw_pmpp(double beta, double t, double u, double m)
 {
+     double s=4*mZ2/(1-beta*beta);
+     double s2=s-2*mZ2;
+     double s4=s-4*mZ2;
+     double u1=u-mZ2;
+     double t1=t-mZ2;
+     double Y=u*t-mZ2*mZ2;
+     double delta=pow(s*mZ2/(2.0*Y),0.5);
      
-     return 0;
+     double st=s/(4.0*m);
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
+     
+     double x=u;
+     double x1=u1;
+     double xt=ut;
+     
+     double bracket_u=4*(4*mW2*(x+mZ2)*(x+mZ2)+x*s4*mZ2)/(s4*Y)*ImE1(st,xt,m)+4*mZ2*Y/s4*ImDst(st,xt,m);
+     x=t;
+     x1=t1;
+     xt=tt;
+     
+     double bracket_t=4*(4*mW2*(x+mZ2)*(x+mZ2)+x*s4*mZ2)/(s4*Y)*ImE1(st,xt,m)+4*mZ2*Y/s4*ImDst(st,xt,m);
+     
+     double imd= 4*s/(s4*Y)*(s2*s4*(4*mW2-mZ2)-8*Y*mW2)*ImC(st,m)+4*(4*mW2-mZ2)*(s*s4-2*Y)/Y*ImCzz(st,m)+8*mW2*(4*mW2-mZ2+2*Y/s4)*ImF(st,tt,ut,m)+(bracket_t+bracket_u);
+     return imd;
 }
 
 double re_dw_pm00(double beta, double t, double u, double m)
 {
      double s=4*mZ2/(1-beta*beta);
+     double s2=s-2*mZ2;
+     double s4=s-4*mZ2;
+     double u1=u-mZ2;
+     double t1=t-mZ2;
+     double Y=u*t-mZ2*mZ2;
      
-     double red= -2*(pow(log(t/u),2)+s/u*pow(log(-t/s),2)+s/t*pow(log(-u/s),2))-4/s*log(s/m)*(t*log(-t/s)+u*log(-u/s));
+     
+     double st=s/(4.0*m);
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
+     
+     double x=u;
+     double x1=u1;
+     double xt=ut;
+     
+     double bracket_u=4*x1/(s4*Y)*(8*mW2*(Y+(x+mZ2)*(x+mZ2))-s2*s4*x)*ReCz(xt,m)+2/(s4*Y)*(8*mW2*(x*x*s*s4-2*Y*x1*x1)+s*((x*x-mZ2*mZ2)*(x*x-mZ2*mZ2)-2*mZ2*x*x*s4-s*x*Y))*ReDst(st,xt,m);
+     x=t;
+     x1=t1;
+     xt=tt;
+     
+     double bracket_t=4*x1/(s4*Y)*(8*mW2*(Y+(x+mZ2)*(x+mZ2))-s2*s4*x)*ReCz(xt,m)+2/(s4*Y)*(8*mW2*(x*x*s*s4-2*Y*x1*x1)+s*((x*x-mZ2*mZ2)*(x*x-mZ2*mZ2)-2*mZ2*x*x*s4-s*x*Y))*ReDst(st,xt,m);
+     
+     double red= 2*s/(s4*Y)*(8*mW2*(s2*s4-4*Y)+s4*(s2*s2-2*Y))*ReC(st,m)+2/Y*(s2+8*mW2)*(s*s4-2*Y)*ReCzz(st,m)+4*mW2*(s2+8*mW2)*ReF(st,tt,ut,m)-2/s4*(s4+16*mW2)*ReE2(tt,ut,m)+(bracket_t+bracket_u);
      return red;
 }
 
 double im_dw_pm00(double beta, double t, double u, double m)
 {
      double s=4*mZ2/(1-beta*beta);
+     double s2=s-2*mZ2;
+     double s4=s-4*mZ2;
+     double u1=u-mZ2;
+     double t1=t-mZ2;
+     double Y=u*t-mZ2*mZ2;
      
-     double imd= 4*Pi*(log(s/m)+(1-t*t/(s*u))*log(-t/s)+(1-u*u/(s*t))*log(-u/s));
+     double st=s/(4.0*m);
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
+     
+     double x=u;
+     double x1=u1;
+     double xt=ut;
+     double bracket_u=4*x1/(s4*Y)*(8*mW2*(Y+(x+mZ2)*(x+mZ2))-s2*s4*x)*ImCz(xt,m)+2/(s4*Y)*(8*mW2*(x*x*s*s4-2*Y*x1*x1)+s*((x*x-mZ2*mZ2)*(x*x-mZ2*mZ2)-2*mZ2*x*x*s4-s*x*Y))*ImDst(st,xt,m);
+     x=t;
+     x1=t1;
+     xt=tt;
+     double bracket_t=4*x1/(s4*Y)*(8*mW2*(Y+(x+mZ2)*(x+mZ2))-s2*s4*x)*ImCz(xt,m)+2/(s4*Y)*(8*mW2*(x*x*s*s4-2*Y*x1*x1)+s*((x*x-mZ2*mZ2)*(x*x-mZ2*mZ2)-2*mZ2*x*x*s4-s*x*Y))*ImDst(st,xt,m);
+     
+     double imd= 2*s/(s4*Y)*(8*mW2*(s2*s4-4*Y)+s4*(s2*s2-2*Y))*ImC(st,m)+2/Y*(s2+8*mW2)*(s*s4-2*Y)*ImCzz(st,m)+4*mW2*(s2+8*mW2)*ImF(st,tt,ut,m)-2/s4*(s4+16*mW2)*ImE2(tt,ut,m)+(bracket_t+bracket_u);
+     //printf(" test %lf\n",pow(10,-13)*2/(t)*(((u*u*u))));//8*mW2*(u*u*s*s4-2*Y*u1*u1)+;;*ImDst(st,ut,m)
+     //printf(" test %lf\n",imd);
      return imd;
 }
 
 double re_dw_pp00(double beta, double t, double u, double m)
 {    
      double s=4*mZ2/(1.0-beta*beta);
+     double st=s/(4.0*m);
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
      
-     return 2*pow(log(s/m),2)-2*Pi*Pi;
+     double red= 4*s*ReC(st,m)-4*mW2*(s+2*mZ2-8*mW2)*ReF(st,tt,ut,m)-4*(4*mW2-mZ2)/s*ReE2(tt,ut,m);
+     //printf(" %lf\n",red);
+     //printf(" test %lf\n",4*s*ReC(st,m));
+     return red;
 }
 
 double im_dw_pp00(double beta, double t, double u, double m)
 {    
      double s=4*mZ2/(1-beta*beta);
+     double st=s/(4.0*m);
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
      
-     return  -4*Pi*log(s/m);
+     double imd= 4*s*ImC(st,m)-4*mW2*(s+2*mZ2-8*mW2)*ImF(st,tt,ut,m)-4*(4*mW2-mZ2)/s*ImE2(tt,ut,m);
+     return imd;
 }
 
 double re_dw_ppp0(double beta, double t, double u, double m)
 {
      double s=4*mZ2/(1.0-beta*beta);
-     double delta=pow(s*mZ2/(2.0*u*t),0.5);
+     double s2=s-2*mZ2;
+     double s4=s-4*mZ2;
+     double u1=u-mZ2;
+     double t1=t-mZ2;
+     double Y=u*t-mZ2*mZ2;
+     double delta=pow(s*mZ2/(2.0*Y),0.5);
      
+     double st=s/(4.0*m);
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
      
-     double red=delta*(-2*(t-u)/s*(pow(log(s/m),2)+pow(log(t/u),2))-4*log(s/m)*log(t/u));
+     double red=delta*(-(t-u)*(s4+beta*s)/(s*s4)*(2*s*ReC(st,m)+ReE2(tt,ut,m))+(s4+beta*s)/s4*((t*t-mZ2*mZ2+Y)*ReDst(st,tt,m)-(u*u-mZ2*mZ2+Y)*ReDst(st,ut,m)));
      //printf(" %lf\n",red);
      return red;
 }
@@ -232,46 +366,142 @@ double re_dw_ppp0(double beta, double t, double u, double m)
 double im_dw_ppp0(double beta, double t, double u, double m)
 {
      double s=4*mZ2/(1.0-beta*beta);
-     double delta=pow(s*mZ2/(2.0*u*t),0.5);
+     double s2=s-2*mZ2;
+     double s4=s-4*mZ2;
+     double u1=u-mZ2;
+     double t1=t-mZ2;
+     double Y=u*t-mZ2*mZ2;
+     double delta=pow(s*mZ2/(2.0*Y),0.5);
      
-     double imd= delta*(-2*(t-u)/s*(-2*Pi*log(s/m))+4*Pi*log(t/u));;
+     double st=s/(4.0*m);
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
+     
+     double imd= delta*(-(t-u)*(s4+beta*s)/(s*s4)*(2*s*ImC(st,m)+ImE2(tt,ut,m))+(s4+beta*s)/s4*((t*t-mZ2*mZ2+Y)*ImDst(st,tt,m)-(u*u-mZ2*mZ2+Y)*ImDst(st,ut,m)));;
      return imd;
 }
 
 double re_dw_pmp0(double beta, double t, double u, double m)
 {
      double s=4*mZ2/(1-beta*beta);
-     double delta=pow(s*mZ2/(2.0*u*t),0.5);
+     double s2=s-2*mZ2;
+     double s4=s-4*mZ2;
+     double u1=u-mZ2;
+     double t1=t-mZ2;
+     double Y=u*t-mZ2*mZ2;
+     double delta=pow(s*mZ2/(2.0*Y),0.5);
      
-     double red= delta*((-2*u/s+32*cW*cW*t/s)*(pow(log(s/m),2))+32*cW*cW*(u/s*log(-t/m)*log(-u/m)+t/s*pow(log(-t/m),2))-2*u/s*pow(log(t/u),2)+(-4*u*(t-u)/(s*s)+32*cW*cW*(t*t+s*s)/(s*s))*(log(s/m))*log(-t/m)-4*u/(s*s)*(u-t-8*cW*cW*t)*log(s/m)*log(-u/m));
+     double st=s/(4.0*m);
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
+     
+     double x=u;
+     double x1=u1;
+     double xt=ut;
+     double xbeta=-beta;
+     double bracket_u=(t-x-xbeta*s)/s4*(2*mZ2*mZ2+2*x*x+s*x-8*cW*cW*Y)*ReDst(st,xt,m)-16*cW*cW/s4*(x+mZ2)*(1+xbeta)*ReE1(st,xt,m);
+     x=t;
+     x1=t1;
+     xt=tt;
+     xbeta=beta;
+     double bracket_t=(u-x-xbeta*s)/s4*(2*mZ2*mZ2+2*x*x+s*x-8*cW*cW*Y)*ReDst(st,xt,m)-16*cW*cW/s4*(x+mZ2)*(1+xbeta)*ReE1(st,xt,m);
+     
+     double red= delta*(-2/s4*((u-t-beta*s)*s4+8*cW*cW*s*(u-t+beta*s4))*ReC(st,m)+16*cW*cW*(t-u-beta*s)*ReCzz(st,m)-64*cW*cW*mW2*beta*Y/s4*ReF(st,tt,ut,m)+8*cW*cW*Y/s4*(u-t-beta*s)*ReDut(tt,ut,m)+(t-u+beta*s)/s*ReE2(tt,ut,m)-(bracket_t-bracket_u));
      return red;
 }
 
 double im_dw_pmp0(double beta, double t, double u, double m)
 {
      double s=4*mZ2/(1.0-beta*beta);
-     double delta=pow(s*mZ2/(2.0*u*t),0.5);
+     double s2=s-2*mZ2;
+     double s4=s-4*mZ2;
+     double u1=u-mZ2;
+     double t1=t-mZ2;
+     double Y=u*t-mZ2*mZ2;
+     double delta=pow(s*mZ2/(2.0*Y),0.5);
      
-     double imd= delta*((-2*u/s+32*cW*cW*t/s)*(-2*Pi*log(s/m))+(-4*u*(t-u)/(s*s)+32*cW*cW*(t*t+s*s)/(s*s))*(-Pi)*log(-t/m)-4*u/(s*s)*(u-t-8*cW*cW*t)*(-Pi)*log(-u/m));
+     double st=s/(4.0*m);
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
+     
+     double x=u;
+     double x1=u1;
+     double xt=ut;
+     double xbeta=-beta;
+     double bracket_u=(t-x-xbeta*s)/s4*(2*mZ2*mZ2+2*x*x+s*x-8*cW*Y)*ImDst(st,xt,m)-16*cW*cW/s4*(x+mZ2)*(1+xbeta)*ImE1(st,xt,m);
+     x=t;
+     x1=t1;
+     xt=tt;
+     xbeta=beta;
+     double bracket_t=(u-x-xbeta*s)/s4*(2*mZ2*mZ2+2*x*x+s*x-8*cW*cW*Y)*ImDst(st,xt,m)-16*cW*cW/s4*(x+mZ2)*(1+xbeta)*ImE1(st,xt,m);
+     //printf(" %lf\n",delta);
+     double imd= delta*(-2/s4*((u-t-beta*s)*s4+8*cW*cW*s*(u-t+beta*s4))*ImC(st,m)+16*cW*cW*(t-u-beta*s)*ImCzz(st,m)-64*cW*cW*mW2*beta*Y/s4*ImF(st,tt,ut,m)+8*cW*cW*Y/s4*(u-t-beta*s)*ImDut(tt,ut,m)+(t-u+beta*s)/s*ImE2(tt,ut,m)-(bracket_t-bracket_u));
      return imd;
 }
 
 double re_dw_pmpm(double beta, double t, double u, double m)
 {
      double s=4*mZ2/(1-beta*beta);
+     double s2=s-2*mZ2;
+     double s4=s-4*mZ2;
+     double u1=u-mZ2;
+     double t1=t-mZ2;
+     double Y=u*t-mZ2*mZ2;
+     double delta=pow(s*mZ2/(2*Y),0.5);
      
-     double red= 16*cW*cW*(pow(log(-t/s),2)+u/t*log(-t/m)*log(-u/s)+u/s*log(s/m)*log(u/t));
+     double st=s/(4.0*m);
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
+     
+     double x=u;
+     double x1=u1;
+     double xt=ut;
+     double xbeta=-beta;
+     double bracket_u=8*cW*cW*(s2+xbeta*s)/s4*ReE1(st,xt,m)+2*mZ2/s4*(s*(s4+xbeta*(x-t))-2*Y)*ReDst(st,xt,m);
+     x=t;
+     x1=t1;
+     xt=tt;
+     xbeta=beta;
+     double bracket_t=8*cW*cW*(s2+xbeta*s)/s4*ReE1(st,xt,m)+2*mZ2/s4*(s*(s4+xbeta*(x-u))-2*Y)*ReDst(st,xt,m);
+     
+     double red= 16*cW*cW*s*(s2/s4*ReC(st,m)+ReCzz(st,m))+4*cW*cW/s4*(s*(s2+4*mW2)*(s4+beta*(t-u))-2*Y*s2)*ReF(st,tt,ut,m)+(bracket_t+bracket_u);
      return red;
 }
 
 double im_dw_pmpm(double beta, double t, double u, double m)
 {
      double s=4*mZ2/(1-beta*beta);
-     double imd= 16*cW*cW*Pi*(u/t*log(s/m)-u/s*log(-u/s)-(s*s+t*t)/(s*t)*log(-t/s));
+     double s2=s-2*mZ2;
+     double s4=s-4*mZ2;
+     double u1=u-mZ2;
+     double t1=t-mZ2;
+     double Y=u*t-mZ2*mZ2;
+     double delta=pow(s*mZ2/(2*Y),0.5);
+     
+     double st=s/(4.0*m);
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
+     
+     double x=u;
+     double x1=u1;
+     double xt=ut;
+     double xbeta=-beta;
+     double bracket_u=8*cW*cW*(s2+xbeta*s)/s4*ImE1(st,xt,m)+2*mZ2/s4*(s*(s4+xbeta*(x-t))-2*Y)*ImDst(st,xt,m);
+     x=t;
+     x1=t1;
+     xt=tt;
+     xbeta=beta;
+     double bracket_t=8*cW*cW*(s2+xbeta*s)/s4*ImE1(st,xt,m)+2*mZ2/s4*(s*(s4+xbeta*(x-u))-2*Y)*ImDst(st,xt,m);
+     
+     double imd= 16*cW*cW*s*(s2/s4*ImC(st,m)+ImCzz(st,m))+4*cW*cW/s4*(s*(s2+4*mW2)*(s4+beta*(t-u))-2*Y*s2)*ImF(st,tt,ut,m)+(bracket_t+bracket_u);
      return imd;
 }
 
-//W amplitudes
+
+
+
+
+
 
 double reAw_pppm(double beta, double t, double u, double m)
 {
