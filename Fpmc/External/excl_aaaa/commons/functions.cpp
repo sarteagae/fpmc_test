@@ -1,109 +1,193 @@
-#include<math.h>
-#include <stdio.h>
 #include<gsl/gsl_sf.h>
+#include<math.h>
+
+const double PI = 4*atan(1);
 
 
-const double Pi = 4 * atan(1);
-double mZ2=91.2*91.2;//Mz/(4.0*mi);
-const double epsilon=0.000001;
+double ReB(double z){
 
-double reaz=4.76;
-double imaz=0;
+  double b;
 
-double ReBz(double s,double m)//use for mw az()=1.749
-{
-     if (s>0)
-     {
-     return -log(4*s)+1.749;
-     }
-     else
-     {
-     return -log(-4*s)+1.749;
-     }
-}
-double ImBz(double s,double m)
-{
-     if (s>0)
-     {
-     return Pi;
-     }
-     else
-     {
-     return 0;
-     }
+  if( z==0)  // b is infinite
+    {
+      return 0;
+    }
+  else if ( z<0 )  // b > 1 
+    {
+      b = sqrt( 1 - 1/z );
+      //     return 0.5 * b * log( (1+b) / (b-1) ) - 1;
+      return b*atanh(1/b)-1;
+    }
+  else if ( z>=1 ) // 0 <= b < 1 
+    {
+      b = sqrt( 1 - 1/z );
+      //      return 0.5 * b * log( (1+b) / (1-b) ) - 1;
+      return b*atanh(b)-1;
+    }
+  else // b is imaginary
+    {
+      b = sqrt( 1/z - 1 );
+      return  b * atan(1/b)-1 ;
+    }
+
 }
 
-double ReC0(double s,double m)
-{
-    return 1/(4.0*m*2.0*s)*(pow(log(4*s),2)-Pi*Pi);
-}
-double ImC0(double s,double m)
-{
-    return 1/(4.0*m*s)*(-Pi)*log(4*s);
-}
-
-double ReCz(double u,double m)
-{
-    return 1/(4.0*m*u)*(1/2.0*pow(log(-4*u),2)+reaz/2.0);
-}
-double ImCz(double u,double m)
-{
-    return 1/(4.0*m*u)*(imaz/2.0);
+double ImB(double z){
+  
+  if(z>1)
+    {
+      return -PI / 2 * sqrt( 1 - 1/z );
+    }
+  else
+    {
+      return 0;
+    }
 }
 
-double ReCzz(double s,double m)
-{
-    return ReC(s,m)+1/(2.0*4.0*m*s)*reaz;
-}
-double ImCzz(double s,double m)
-{
-    return ImC(s,m)+1/(2.0*4.0*m*s)*imaz;
+double ReT(double z){
+
+  double b;
+  double temp;
+
+  if( z==0)  // b is infinite
+    {
+      return 0;
+    }
+  else if( z<0 ) // b>1 is real
+    {
+      b = sqrt( 1 - 1/z );
+      temp = 0.5 * log( (1+b) / (b-1) );
+      return temp*temp;
+    }
+  else if (z>1) // 0<b<1 is real
+    {
+      b = sqrt( 1 - 1/z );
+      temp = 0.5 * log( (1+b) / (1-b) );
+      return temp*temp - 0.25 * PI * PI;
+    }
+  else if (z==1) // b=0
+    {
+      return -0.25 * PI * PI;
+    }
+  else // b is imaginary
+    {
+      b = sqrt( 1/z - 1 );
+      temp = atan( 1/b );
+      return - temp*temp ;
+    }
+
 }
 
-double ReDut(double u, double t,double m)
-{
-    return 2/(4.0*m*4.0*m*u*t)*(log(-4*u)*log(-4*t)-Pi*Pi/2.0+reaz);
+double ImT(double z){
+  
+  if(z>1)
+    {
+      return -PI * acosh(sqrt( z ));
+    }
+  else
+    {
+      return 0;
+    }
 }
 
+double ReF(double q, double a){   // some auxiliary function used in ReI(z,w)
+                                  // (sum of the 4 dilogs)  
 
-double ImDut(double u, double t,double m)
-{
-    return 2/(4.0*m*4.0*m*u*t)*(imaz);
+  double b ;
+  gsl_sf_result result_re;
+  gsl_sf_result result_im;
+
+  double r;
+  double theta;
+
+  double result;
+
+  if ( q>0 && q<1 )  // b(q) is imaginary, arguments of dilogs are complex
+    {
+      b = sqrt( 1/q - 1 );
+
+      r = ( a + 1 ) / sqrt( a*a + b*b );
+      theta = - atan(b/a);    // r e^itheta = (a+1)/(a+b)
+
+      gsl_sf_complex_dilog_e(r, theta, &result_re, &result_im);
+      
+      result = -2 * result_re.val;  // -Re[ Li2( a+1/a+b) + Li2( a+1/a-b)] 
+      
+      r=(a-1) / sqrt( a * a + b * b );      // r e^itheta = (a-1)/(a+b) 
+      
+      gsl_sf_complex_dilog_e(r, theta, &result_re, &result_im);
+
+      result += 2 * result_re.val;     // Re[ Li2( a-1/a+b) + Li2( a-1/a-b)] 
+
+    }
+  else // b(q) real and so are all the arguments of the dilogs
+    {
+      
+      
+      b= sqrt( 1-1/q );
+
+      result =  gsl_sf_dilog( (a-1)/(a+b) );
+      result += gsl_sf_dilog( (a-1)/(a-b) );
+      result -= gsl_sf_dilog( (a+1)/(a+b) );
+      result -= gsl_sf_dilog( (a+1)/(a-b) );
+
+    }
+
+  return result;
 }
 
-double ReDst(double s, double t,double m)
-{
-    return 2/(4.0*m*4.0*m*s*t)*(log(4*s)*log(-4*t)-Pi*Pi/2.0+reaz);
-}
-double ImDst(double s, double t,double m)
-{
-    return 2/(4.0*m*4.0*m*s*t)*(-Pi*log(-4*t)+imaz);
+double ReI(double z, double w){ // allowed regions z,w<=0 || z>=0,-z<=w<=0
+
+  double a ;
+  double lim; 
+
+  lim = 1.0e-4;
+
+   if ( z==0 || w==0 )
+   {
+      return 0;
+   }
+  
+  // because of exact cancellations Taylor-expand 
+  // the function near the origin to maintain double precision
+  if (z<lim && z>-lim && w< lim && w>-lim)    
+    {        
+      //      return 2./3.*z*z;
+      return 2./3. * z * w + 4./15. * z * w * (z+w) + 16./105. * z*w*(z*z+w*w+z*w/2);
+    } 
+
+  a = sqrt( 1-1/w-1/z);
+
+  return ( ReF(z,a) + ReF(w,a) ) / (2*a);
+
+
 }
 
-double ReF(double s, double t, double u,double m)
-{
-    return 2/(4.0*m*4.0*m*s*u)*log(4*s)*log(-4*u)+2/(4.0*m*4.0*m*s*t)*log(4*s)*log(-4*t)+2/(4.0*m*4.0*m*t*u)*log(-4*u)*log(-4*t);
-}
-double ImF(double s, double t, double u,double m)
-{
-    return -2*Pi/(4.0*m*s)*(1/(4.0*m*u)*log(-4*u)+1/(4.0*m*t)*log(-4*t));
-}
+double ImI(double z,double w){ // allowed regions z,w<=0 || z>=0,-z<=w<=0  
+  
+  double b;
+  double a;
 
-double ReE1(double s, double t,double m)
-{
-    return Pi*Pi-reaz+pow(log(-4*t),2)-2*log(4*s)*log(-4*t);
-}
+  if ( z==0 || w ==0)
+    {
+      return 0;
+    }
 
-double ImE1(double s, double t,double m)
-{
-    return -imaz+2*Pi*log(-4*t);
-}
+  a = sqrt( 1 - 1/z - 1/w );
 
-double ReE2(double t, double u,double m)
-{
-    return Pi*Pi+pow(log(-4*t)-log(-4*u),2);
-}
-double ImE2(double t, double u,double m)
-{
-    return 0;
+  if ( z>1 && w<0 )
+    {
+      b = sqrt( 1 - 1/z );
+    }
+  else if ( w>1 && z<0)
+    {
+      b = sqrt ( 1 - 1/w );
+    }
+  else
+    {
+      return 0;  
+    }
+
+  return PI / (2*a) * log( (a-b)/(a+b) );
+
 }
