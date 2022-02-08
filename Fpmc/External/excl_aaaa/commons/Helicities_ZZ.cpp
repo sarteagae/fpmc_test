@@ -45,75 +45,322 @@ double Imuon=-1/2.;
 double Itau=-1/2.;
 
 
-
 double reAs_pppm(double beta, double t, double u, double m)
 {
-     return -4;
+     double s=4*mZ2/(1-beta*beta);
+     double s2=s-2*mZ2;
+     double s4=s-4*mZ2;
+     double u1=u-mZ2;
+     double t1=t-mZ2;
+     double Y=u*t-mZ2*mZ2;
+     
+     double st=s/(4.0*m);//define normalized var for loop functions
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
+     
+     double x=u;
+     double xt=ut;
+     double x1=u1;
+     double bracket_u=m*x/Y*ReE1(st,xt,m)+2*m*(1+mZ2*s2/(s4*x1))*ReCz(xt,m)+mZ2*Y/(s4*x1*x1)*(2*x/s-1)*ReBz(xt,m)+2*mZ2*mZ2*m/s4*ReDst(st,xt,m);
+     
+     x=t;
+     x1=t1;
+     xt=tt;
+     double bracket_t=m*x/Y*ReE1(st,xt,m)+2*m*(1+mZ2*s2/(s4*x1))*ReCz(xt,m)+mZ2*Y/(s4*x1*x1)*(2*x/s-1)*ReBz(xt,m)+2*mZ2*mZ2*m/s4*ReDst(st,xt,m);
+     
+     
+     double rea=-4*s2*Y/(t1*u1*s4)+4*s2*m*(s*s4-2*Y)/(s4*Y)*ReC(st,m)+4*s*s4*m/Y*ReCzz(st,m)+8*m*m*ReF(st,tt,ut,m)+4*(mZ2*Y-m*s*s4)/(s*s*s4)*ReE2(tt,ut,m)-8*mZ2*m*Y/(s*s4)*ReDut(tt,ut,m)-4*(bracket_t+bracket_u);
+     return rea;
 }
 
 double imAs_pppm(double beta, double t, double u, double m)
 {
-     return 0;
+     double s=4*mZ2/(1-beta*beta);
+     double s2=s-2*mZ2;
+     double s4=s-4*mZ2;
+     double u1=u-mZ2;
+     double t1=t-mZ2;
+     double Y=u*t-mZ2*mZ2;
+     
+     double st=s/(4.0*m);
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
+     
+     double x=u;
+     double xt=ut;
+     double x1=u1;
+     double bracket_u=m*x/Y*ImE1(st,xt,m)+2*m*(1+mZ2*s2/(s4*x1))*ImCz(xt,m)+mZ2*Y/(s4*x1*x1)*(2*x/s-1)*ImBz(xt,m)+2*mZ2*mZ2*m/s4*ImDst(st,xt,m);
+     x=t;
+     x1=t1;
+     xt=tt;
+     double bracket_t=m*x/Y*ImE1(st,xt,m)+2*m*(1+mZ2*s2/(s4*x1))*ImCz(xt,m)+mZ2*Y/(s4*x1*x1)*(2*x/s-1)*ImBz(xt,m)+2*mZ2*mZ2*m/s4*ImDst(st,xt,m);
+     
+     double ima=4*s2*m*(s*s4-2*Y)/(s4*Y)*ImC(st,m)+4*s*s4*m/Y*ImCzz(st,m)+8*m*m*ImF(st,tt,ut,m)+4*(mZ2*Y-m*s*s4)/(s*s*s4)*ImE2(tt,ut,m)-8*mZ2*m*Y/(s*s4)*ImDut(tt,ut,m)-4*(bracket_t+bracket_u);
+     return ima;
 }
 
 double reAs_pppp(double beta, double t, double u, double m)
 {
+     //printf("ok ici 4 \n");
      double s=4*mZ2/(1-beta*beta);
-     return 4-4*u*t/(s*s)*(pow(log(t/u),2)+Pi*Pi)+4*(t-u)/s*log(t/u);
+     double s2=s-2*mZ2;
+     double s4=s-4*mZ2;
+     double u1=u-mZ2;
+     double t1=t-mZ2;
+     double Y=u*t-mZ2*mZ2;
+      
+     double st=s/(4.0*m);
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
+     //printf("ok ici 5 \n");
+     double x=u;
+     double xt=ut;
+     double x1=u1;
+     double bracket_u=2*m*mZ2*mZ2/s4*ReDst(st,xt,m)-(s2+beta*s)*(2*mZ2*Y+x1*(2*x1+s)*(x+mZ2))/(2*s4*s*x1*x1)*ReBz(xt,m)-2*m*(x1*(x-t)+Y)*(s2+beta*s)/(s4*x1*s)*ReCz(xt,m);
+     x=t;
+     x1=t1;
+     xt=tt;
+     double bracket_t=2*m*mZ2*mZ2/s4*ReDst(st,xt,m)-(s2+beta*s)*(2*mZ2*Y+x1*(2*x1+s)*(x+mZ2))/(2*s4*s*x1*x1)*ReBz(xt,m)-2*m*(x1*(x-u)+Y)*(s2+beta*s)/(s4*x1*s)*ReCz(xt,m);
+     //printf("ok ici 6 %lf \n", bracket_u);
+     double rea=4*(mZ2*(2*Y-s*s4)+beta*s*Y)/(s4*t1*u1)+16*mZ2*m/s4*ReC(st,m)+8*m*m*ReF(st,tt,ut,m)+8*Y*m/(s*s4)*(s2+beta*s)*ReDut(tt,ut,m)-2*((s2+beta*s)*Y-4*s*mZ2*m)/(s*s*s4)*ReE2(tt,ut,m)+4*(bracket_u+bracket_t);
+     //printf("ok ici 7 %lf \n",rea);
+     return rea;
 }
 
 double imAs_pppp(double beta, double t, double u, double m)
 {
-     return 0;
+     double s=4*mZ2/(1-beta*beta);
+     double s2=s-2*mZ2;
+     double s4=s-4*mZ2;
+     double u1=u-mZ2;
+     double t1=t-mZ2;
+     double Y=u*t-mZ2*mZ2;
+     
+     double st=s/(4.0*m);
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
+     
+     double x=u;
+     double xt=ut;
+     double x1=u1;
+     double bracket_u=2*m*mZ2*mZ2/s4*ImDst(st,xt,m)-(s2+beta*s)*(2*mZ2*Y+x1*(2*x1+s)*(x+mZ2))/(2*s4*s*x1*x1)*ImBz(xt,m)-2*m*(x1*(x-t)+Y)*(s2+beta*s)/(s4*x1*s)*ImCz(xt,m);
+     x=t;
+     x1=t1;
+     xt=tt;
+     double bracket_t=2*m*mZ2*mZ2/s4*ImDst(st,xt,m)-(s2+beta*s)*(2*mZ2*Y+x1*(2*x1+s)*(x+mZ2))/(2*s4*s*x1*x1)*ImBz(xt,m)-2*m*(x1*(x-u)+Y)*(s2+beta*s)/(s4*x1*s)*ImCz(xt,m);
+     
+     double ima=16*mZ2*m/s4*ImC(st,m)+8*m*m*ImF(st,tt,ut,m)+8*Y*m/(s*s4)*(s2+beta*s)*ImDut(tt,ut,m)-2*((s2+beta*s)*Y-4*s*mZ2*m)/(s*s*s4)*ImE2(tt,ut,m)+4*(bracket_u+bracket_t);
+     return ima;
 }
 
 double reAs_pmpp(double beta, double t, double u, double m)
 {
+     double s=4*mZ2/(1-beta*beta);
+     double s2=s-2*mZ2;
+     double s4=s-4*mZ2;
+     double u1=u-mZ2;
+     double t1=t-mZ2;
+     double Y=u*t-mZ2*mZ2;
      
-     return -4;
+     double st=s/(4.0*m);
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
+     
+     double x=u;
+     double x1=u1;
+     double xt=ut;
+     double bracket_u=mZ2*(Y+2*x*mZ2)/(s4*x1*x1)*ReBz(xt,m)-2*m*s2*x/(s4*x1)*ReCz(xt,m)+2*m*mZ2*mZ2/s4*ReDst(st,xt,m)-x*(s4*m+mZ2*mZ2)/(s4*Y)*ReE1(st,xt,m);
+     x=t;
+     x1=t1;
+     xt=tt;
+     double bracket_t=mZ2*(Y+2*x*mZ2)/(s4*x1*x1)*ReBz(xt,m)-2*m*s2*x/(s4*x1)*ReCz(xt,m)+2*m*mZ2*mZ2/s4*ReDst(st,xt,m)-x*(s4*m+mZ2*mZ2)/(s4*Y)*ReE1(st,xt,m);
+     
+     double rea=-4*s2*Y/(s4*t1*u1)+4*(s4*m+mZ2*mZ2)/(s4*Y)*(s*s2*ReC(st,m)+(s*s4-2*Y)*ReCzz(st,m))-4*m*s2/(s*s4)*ReE2(tt,ut,m)+8*m*m*ReF(st,tt,ut,m)+4*(bracket_u+bracket_t);
+     return rea;
 }
 double imAs_pmpp(double beta, double t, double u, double m)
 {
+     double s=4*mZ2/(1-beta*beta);
+     double s2=s-2*mZ2;
+     double s4=s-4*mZ2;
+     double u1=u-mZ2;
+     double t1=t-mZ2;
+     double Y=u*t-mZ2*mZ2;
      
-     return 0;
+     double st=s/(4.0*m);
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
+     
+     double x=u;
+     double x1=u1;
+     double xt=ut;
+     double bracket_u=mZ2*(Y+2*x*mZ2)/(s4*x1*x1)*ImBz(xt,m)-2*m*s2*x/(s4*x1)*ImCz(xt,m)+2*m*mZ2*mZ2/s4*ImDst(st,xt,m)-x*(s4*m+mZ2*mZ2)/(s4*Y)*ImE1(st,xt,m);
+     x=t;
+     x1=t1;
+     xt=tt;
+     double bracket_t=mZ2*(Y+2*x*mZ2)/(s4*x1*x1)*ImBz(xt,m)-2*m*s2*x/(s4*x1)*ImCz(xt,m)+2*m*mZ2*mZ2/s4*ImDst(st,xt,m)-x*(s4*m+mZ2*mZ2)/(s4*Y)*ImE1(st,xt,m);
+     
+     double rea=4*(s4*m+mZ2*mZ2)/(s4*Y)*(s*s2*ImC(st,m)+(s*s4-2*Y)*ImCzz(st,m))-4*m*s2/(s*s4)*ImE2(tt,ut,m)+8*m*m*ImF(st,tt,ut,m)+4*(bracket_u+bracket_t);
+     return rea;
 }
 
 double reAs_pm00(double beta, double t, double u, double m)
 {
+     double s=4*mZ2/(1-beta*beta);
+     double s2=s-2*mZ2;
+     double s4=s-4*mZ2;
+     double u1=u-mZ2;
+     double t1=t-mZ2;
+     double Y=u*t-mZ2*mZ2;
      
-     return 0;
+     double st=s/(4.0*m);
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
+     
+     double x=u;
+     double x1=u1;
+     double xt= ut;
+     double bracket_u=2*mZ2/(s4*x1*x1)*(x*x+mZ2*mZ2)*ReBz(xt,m)-8*m*mZ2*Y/(s4*s*x1)*ReCz(xt,m)-s*mZ2*m/s4*ReDst(st,xt,m)+s*x*mZ2/(2*s4*Y)*ReE1(st,xt,m);
+     x=t;
+     x1=t1;
+     xt=tt;
+     double bracket_t=2*mZ2/(s4*x1*x1)*(x*x+mZ2*mZ2)*ReBz(xt,m)-8*m*mZ2*Y/(s4*s*x1)*ReCz(xt,m)-s*mZ2*m/s4*ReDst(st,xt,m)+s*x*mZ2/(2*s4*Y)*ReE1(st,xt,m);
+     
+     double rea=-16*mZ2*Y/(s4*t1*u1)+2*s*s*s2*mZ2/(s4*Y)*ReC(st,m)+2*s*mZ2/(s4*Y)*(s*s4-2*Y)*ReCzz(st,m)-4*(t-u)*(t-u)*mZ2*m/(s4*s)*ReDut(tt,ut,m)-4*(bracket_u+bracket_t);
+     return rea;
 }
 double imAs_pm00(double beta, double t, double u, double m)
 {
+     double s=4*mZ2/(1-beta*beta);
+     double s2=s-2*mZ2;
+     double s4=s-4*mZ2;
+     double u1=u-mZ2;
+     double t1=t-mZ2;
+     double Y=u*t-mZ2*mZ2;
      
-     return 0;
+     double st=s/(4.0*m);
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
+     
+     double x=u;
+     double x1=u1;
+     double xt=ut;
+     double bracket_u=2*mZ2/(s4*x1*x1)*(x*x+mZ2*mZ2)*ImBz(xt,m)-8*m*mZ2*Y/(s4*s*x1)*ImCz(xt,m)-s*mZ2*m/s4*ImDst(st,xt,m)+s*x*mZ2/(2*s4*Y)*ImE1(st,xt,m);
+     x=t;
+     x1=t1;
+     xt=tt;
+     double bracket_t=2*mZ2/(s4*x1*x1)*(x*x+mZ2*mZ2)*ImBz(xt,m)-8*m*mZ2*Y/(s4*s*x1)*ImCz(xt,m)-s*mZ2*m/s4*ImDst(st,xt,m)+s*x*mZ2/(2*s4*Y)*ImE1(st,xt,m);
+     
+     double ima=2*s*s*s2*mZ2/(s4*Y)*ImC(st,m)+2*s*mZ2/(s4*Y)*(s*s4-2*Y)*ImCzz(st,m)-4*(t-u)*(t-u)*mZ2*m/(s4*s)*ImDut(tt,ut,m)-4*(bracket_u+bracket_t);
+     return ima;
 }
 
 
 
 double reAs_pp00(double beta, double t, double u, double m)
 {
+     double s=4*mZ2/(1-beta*beta);
+     double s2=s-2*mZ2;
+     double s4=s-4*mZ2;
+     double u1=u-mZ2;
+     double t1=t-mZ2;
+     double Y=u*t-mZ2*mZ2;
      
-     return 0;
+     double st=s/(4.0*m);
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
+     
+     double x=u;
+     double x1=u1;
+     double xt=ut;
+     double bracket_u=2*mZ2/(s4*s*x1*x1)*(2*mZ2*Y+x1*(x-t)*(x+mZ2))*ReBz(xt,m)-8*mZ2*mZ2*m/(s4*x1)*ReCz(xt,m)-s*mZ2*m/s4*ReDst(st,xt,m);
+     x=t;
+     x1=t1;
+     xt=tt;
+     double bracket_t=2*mZ2/(s4*s*x1*x1)*(2*mZ2*Y+x1*(x-u)*(x+mZ2))*ReBz(xt,m)-8*mZ2*mZ2*m/(s4*x1)*ReCz(xt,m)-s*mZ2*m/s4*ReDst(st,xt,m);
+     
+     double rea=-4*mZ2*m*(t-u)*(t-u)/(s*s4)*ReDut(tt,ut,m)+16*mZ2*Y/(s4*t1*u1)+32*mZ2*m/s4*ReC(st,m)+2*mZ2*(t-u)*(t-u)/(s*s*s4)*ReE2(tt,ut,m)-4*(bracket_u+bracket_t);
+     return rea;
 }
 double imAs_pp00(double beta, double t, double u, double m)
 {
+     double s=4*mZ2/(1-beta*beta);
+     double s2=s-2*mZ2;
+     double s4=s-4*mZ2;
+     double u1=u-mZ2;
+     double t1=t-mZ2;
+     double Y=u*t-mZ2*mZ2;
      
-     return 0;
+     double st=s/(4.0*m);
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
+     
+     double x=u;
+     double xt=ut;
+     double x1=u1;
+     double bracket_u=2*mZ2/(s4*s*x1*x1)*(2*mZ2*Y+x1*(x-t)*(x+mZ2))*ImBz(xt,m)-8*mZ2*mZ2*m/(s4*x1)*ImCz(xt,m)-s*mZ2*m/s4*ImDst(st,xt,m);
+     x=t;
+     x1=t1;
+     xt=tt;
+     double bracket_t=2*mZ2/(s4*s*x1*x1)*(2*mZ2*Y+x1*(x-u)*(x+mZ2))*ImBz(xt,m)-8*mZ2*mZ2*m/(s4*x1)*ImCz(xt,m)-s*mZ2*m/s4*ImDst(st,xt,m);
+     
+     double ima=-4*mZ2*m*(t-u)*(t-u)/(s*s4)*ImDut(tt,ut,m)+32*mZ2*m/s4*ImC(st,m)+2*mZ2*(t-u)*(t-u)/(s*s*s4)*ImE2(tt,ut,m)-4*(bracket_u+bracket_t);
+     return ima;
 }
 
 
 double reAs_ppp0(double beta, double t, double u, double m)
 {
      double s=4*mZ2/(1-beta*beta);
-     double delta=pow(s*mZ2/(2*u*t),0.5);
+     double s2=s-2*mZ2;
+     double s4=s-4*mZ2;
+     double u1=u-mZ2;
+     double t1=t-mZ2;
+     double Y=u*t-mZ2*mZ2;
+     double delta=pow(s*mZ2/(2*Y),0.5);
      
-     return delta*(-8*(t-u)/s+4*(t-u)*t*u/pow(s,3)*(pow(log(t/u),2)+Pi*Pi)+16*u*t/pow(s,2)*log(t/u));
+     double st=s/(4.0*m);
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
+     
+     double x=u;
+     double x1=u1;
+     double xt=ut;
+     double bracket_u=(1+beta)*Y/(s*x1*x1)*(s*mZ2-2*x*x1)*ReBz(xt,m)+2*m*(1+beta)*(x*x-mZ2*mZ2+Y)/x1*ReCz(xt,m)+m*(Y+x*x-mZ2*mZ2)*ReDst(st,xt,m);
+     x=t;
+     x1=t1;
+     xt=tt;
+     double bracket_t=(1+beta)*Y/(s*x1*x1)*(s*mZ2-2*x*x1)*ReBz(xt,m)+2*m*(1+beta)*(x*x-mZ2*mZ2+Y)/x1*ReCz(xt,m)+m*(Y+x*x-mZ2*mZ2)*ReDst(st,xt,m);
+     
+     double rea=delta*(-4*(t-u)/s4*((1+beta)*Y/(t1*u1)+2*m*ReC(st,m)-1/s*(Y*(1+beta)/(2*s)+beta*m)*ReE2(tt,ut,m)+(1+beta)*m*Y/s*ReDut(tt,ut,m))+4/s4*(bracket_t-bracket_u));
+     return rea;
 }
 
 double imAs_ppp0(double beta, double t, double u, double m)
 {
-     return 0;
+     double s=4*mZ2/(1-beta*beta);
+     double s2=s-2*mZ2;
+     double s4=s-4*mZ2;
+     double u1=u-mZ2;
+     double t1=t-mZ2;
+     double Y=u*t-mZ2*mZ2;
+     double delta=pow(s*mZ2/(2*Y),0.5);
+     
+     double st=s/(4.0*m);
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
+     
+     double x=u;
+     double x1=u1;
+     double xt=ut;
+     double bracket_u=(1+beta)*Y/(s*x1*x1)*(s*mZ2-2*x*x1)*ImBz(xt,m)+2*m*(1+beta)*(x*x-mZ2*mZ2+Y)/x1*ImCz(xt,m)+m*(Y+x*x-mZ2*mZ2)*ImDst(st,xt,m);
+     x=t;
+     x1=t1;
+     xt=tt;
+     double bracket_t=(1+beta)*Y/(s*x1*x1)*(s*mZ2-2*x*x1)*ImBz(xt,m)+2*m*(1+beta)*(x*x-mZ2*mZ2+Y)/x1*ImCz(xt,m)+m*(Y+x*x-mZ2*mZ2)*ImDst(st,xt,m);
+     
+     double ima=delta*(-4*(t-u)/s4*(2*m*ImC(st,m)-1/s*(Y*(1+beta)/(2*s)+beta*m)*ImE2(tt,ut,m)+(1+beta)*m*Y/s*ImDut(tt,ut,m))+4/s4*(bracket_t-bracket_u));
+     return ima;
 }
 
 
@@ -121,32 +368,122 @@ double imAs_ppp0(double beta, double t, double u, double m)
 double reAs_pmp0(double beta, double t, double u, double m)
 {
      double s=4*mZ2/(1-beta*beta);
-     double delta=pow(s*mZ2/(2*u*t),0.5);
+     double s2=s-2*mZ2;
+     double s4=s-4*mZ2;
+     double u1=u-mZ2;
+     double t1=t-mZ2;
+     double Y=u*t-mZ2*mZ2;
+     double delta=pow(s*mZ2/(2*Y),0.5);
      
-     return delta*(-8*u/s+4*t/u*pow(log(-s/t),2)+8*t/s*log(-s/t));
+     double st=s/(4.0*m);
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
+     
+     double x=u;
+     double x1=u1;
+     double xt=ut;
+     double xbeta=-beta;
+     double bracket_u=(mZ2*Y-x*x1*(x+mZ2)+xbeta*(mZ2*Y-x*x1*x1))/(s4*x1*x1)*ReBz(xt,m)-((2*mZ2*mZ2+x*s2)*(2*m*Y+s*x*x)+xbeta*s*x*(4*m*Y+s*x*x))/(2*s4*Y*s*x)*ReE1(st,xt,m)+2*m*((2*mZ2*x1+s*x)*Y-xbeta*s*s*x*x)/(s*s4*x*x1)*ReCz(xt,m);
+     x=t;
+     x1=t1;
+     xt=tt;
+     xbeta=beta;
+     double bracket_t=(mZ2*Y-x*x1*(x+mZ2)+xbeta*(mZ2*Y-x*x1*x1))/(s4*x1*x1)*ReBz(xt,m)-((2*mZ2*mZ2+x*s2)*(2*m*Y+s*x*x)+xbeta*s*x*(4*m*Y+s*x*x))/(2*s4*Y*s*x)*ReE1(st,xt,m)+2*m*((2*mZ2*x1+s*x)*Y-xbeta*s*s*x*x)/(s*s4*x*x1)*ReCz(xt,m);
+     
+     double rea=delta*(-4*(u-t-s*beta)*Y/(s4*t1*u1)+4*(u-t+s*beta)/s4*ReBz(st,m)+2*s/(s4*Y)*((t-u)*(2*mZ2*mZ2-s2*s2)+beta*(4*m*Y+s*(t*t+u*u)))*ReC(st,m) +2*s*s2/(s4*Y)*((u-t)*s4+beta*(s*s4-2*Y))*ReCzz(st,m)+4*m*(t-u)/(s*s4)*ReE2(tt,ut,m)-4*(bracket_t-bracket_u));
+     return rea;
 }
 
 double imAs_pmp0(double beta, double t, double u, double m)
 {
      double s=4*mZ2/(1-beta*beta);
-     double delta=pow(s*mZ2/(2*u*t),0.5);
+     double s2=s-2*mZ2;
+     double s4=s-4*mZ2;
+     double u1=u-mZ2;
+     double t1=t-mZ2;
+     double Y=u*t-mZ2*mZ2;
+     double delta=pow(s*mZ2/(2*Y),0.5);
      
-     return delta*(4*t/u*(-2*Pi*log(-s/t))-8*t*Pi/s);
+     double st=s/(4.0*m);
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
+     
+     double x=u;
+     double x1=u1;
+     double xt=ut;
+     double xbeta=-beta;
+     double bracket_u=(mZ2*Y-x*x1*(x+mZ2)+xbeta*(mZ2*Y-x*x1*x1))/(s4*x1*x1)*ImBz(xt,m)-((2*mZ2*mZ2+x*s2)*(2*m*Y+s*x*x)+xbeta*s*x*(4*m*Y+s*x*x))/(2*s4*Y*s*x)*ImE1(st,xt,m)+2*m*((2*mZ2*x1+s*x)*Y-xbeta*s*s*x*x)/(s*s4*x*x1)*ImCz(xt,m);
+     x=t;
+     x1=t1;
+     xt=tt;
+     xbeta=beta;
+     double bracket_t=(mZ2*Y-x*x1*(x+mZ2)+xbeta*(mZ2*Y-x*x1*x1))/(s4*x1*x1)*ImBz(xt,m)-((2*mZ2*mZ2+x*s2)*(2*m*Y+s*x*x)+xbeta*s*x*(4*m*Y+s*x*x))/(2*s4*Y*s*x)*ImE1(st,xt,m)+2*m*((2*mZ2*x1+s*x)*Y-xbeta*s*s*x*x)/(s*s4*x*x1)*ImCz(xt,m);
+     
+     double ima=delta*(4*(u-t+s*beta)/s4*ImBz(st,m)+2*s/(s4*Y)*((t-u)*(2*mZ2*mZ2-s2*s2)+beta*(4*m*Y+s*(t*t+u*u)))*ImC(st,m) +2*s*s2/(s4*Y)*((u-t)*s4+beta*(s*s4-2*Y))*ImCzz(st,m)+4*m*(t-u)/(s*s4)*ImE2(tt,ut,m)-4*(bracket_t-bracket_u));
+      x=u;
+      x1=u1;
+      xt=ut;
+     xbeta=-beta;
+     return ima;
 }
 
 
 double reAs_pmpm(double beta, double t, double u, double m)
 {
      double s=4*mZ2/(1-beta*beta);
- 
-     return 4-4*s*t/(u*u)*(pow(log(-s/t),2))+4*(s-t)/u*log(-s/t);
+     double s2=s-2*mZ2;
+     double s4=s-4*mZ2;
+     double u1=u-mZ2;
+     double t1=t-mZ2;
+     double Y=u*t-mZ2*mZ2;
+     double delta=pow(s*mZ2/(2*Y),0.5);
+     
+     double st=s/(4.0*m);
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
+     
+     double x=u;
+     double x1=u1;
+     double xt=ut;
+     double xbeta=-beta;
+     double bracket_u=-x/(2*s4*Y*Y)*(2*m*s4*Y+s*s4*x*x-2*mZ2*mZ2*Y-xbeta*s*x*(x*x-mZ2*mZ2+Y))*ReE1(st,xt,m)+m/(s4*Y)*(2*m*s4*Y+s*s4*x*x-2*mZ2*mZ2*Y-2*xbeta*s*x*(x*x-mZ2*mZ2+Y))*ReDst(st,xt,m)+2*m/(s4*x1)*(mZ2*(s4+xbeta*s)-2*mZ2*Y/s-xbeta*s*x*(x*x-mZ2*mZ2)/Y)*ReCz(xt,m)+((mZ2*mZ2*(x-t)/(s4*x1*x1)-0.5)*(1+xbeta)+mZ2/s4*(1-2*mZ2*mZ2/(x1*x1))+2*x*xbeta/s4-x*x/(Y*s4)*(s4-xbeta*(x-t)))*ReBz(xt,m);
+     x=t;
+     x1=t1;
+     xt=tt;
+     xbeta=beta;
+     double bracket_t=-x/(2*s4*Y*Y)*(2*m*s4*Y+s*s4*x*x-2*mZ2*mZ2*Y-xbeta*s*x*(x*x-mZ2*mZ2+Y))*ReE1(st,xt,m)+m/(s4*Y)*(2*m*s4*Y+s*s4*x*x-2*mZ2*mZ2*Y-2*xbeta*s*x*(x*x-mZ2*mZ2+Y))*ReDst(st,xt,m)+2*m/(s4*x1)*(mZ2*(s4+xbeta*s)-2*mZ2*Y/s-xbeta*s*x*(x*x-mZ2*mZ2)/Y)*ReCz(xt,m)+((mZ2*mZ2*(x-u)/(s4*x1*x1)-0.5)*(1+xbeta)+mZ2/s4*(1-2*mZ2*mZ2/(x1*x1))+2*x*xbeta/s4-x*x/(Y*s4)*(s4-xbeta*(x-u)))*ReBz(xt,m);
+     
+     double rea=4*(s2*Y+beta*mZ2*s*(u-t))/(s4*t1*u1)-4*s2*(Y-s*(s4+beta*(u-t)))/(s4*Y)*ReBz(st,m)+4*s*s2/(s4*Y)*((m+s*(s*s4-Y+mZ2*mZ2)/(2*Y))*(s4+beta*(u-t))-s*s4-mZ2*mZ2)*ReC(st,m)+4*s/Y*((m+(t*t*(t*t-mZ2*mZ2+Y)+u*u*(u*u-mZ2*mZ2+Y)+2*Y*(s2*s2-mZ2*mZ2))/(2*Y*s4))*(s4+beta*(u-t))+mZ2*mZ2-s2*s2)*ReCzz(st,m)+8*m*(m-mZ2*Y/(s*s4))*ReDut(tt,ut,m) +4*(bracket_t+bracket_u);
+     return rea;
 }
 
 double imAs_pmpm(double beta, double t, double u, double m)
 {
      double s=4*mZ2/(1-beta*beta);
+     double s2=s-2*mZ2;
+     double s4=s-4*mZ2;
+     double u1=u-mZ2;
+     double t1=t-mZ2;
+     double Y=u*t-mZ2*mZ2;
+     double delta=pow(s*mZ2/(2.0*Y),0.5);
      
-     return -4*s*t/(u*u)*(-2*Pi*log(-s/t))+4*(s-t)/u*(-Pi);
+     double st=s/(4.0*m);
+     double tt=t/(4.0*m);
+     double ut=u/(4.0*m);
+     
+     double x=u;
+     double x1=u1;
+     double xt=ut;
+     double xbeta=-beta;
+     double bracket_u=-x/(2*s4*Y*Y)*(2*m*s4*Y+s*s4*x*x-2*mZ2*mZ2*Y-xbeta*s*x*(x*x-mZ2*mZ2+Y))*ImE1(st,xt,m)+m/(s4*Y)*(2*m*s4*Y+s*s4*x*x-2*mZ2*mZ2*Y-2*xbeta*s*x*(x*x-mZ2*mZ2+Y))*ImDst(st,xt,m)+2*m/(s4*x1)*(mZ2*(s4+xbeta*s)-2*mZ2*Y/s-xbeta*s*x*(x*x-mZ2*mZ2)/Y)*ImCz(xt,m)+((mZ2*mZ2*(x-t)/(s4*x1*x1)-0.5)*(1+xbeta)+mZ2/s4*(1-2*mZ2*mZ2/(x1*x1))+2*x*xbeta/s4-x*x/(Y*s4)*(s4-xbeta*(x-t)))*ImBz(xt,m);
+     x=t;
+     x1=t1;
+     xt=tt;
+     xbeta=beta;
+     double bracket_t=-x/(2*s4*Y*Y)*(2*m*s4*Y+s*s4*x*x-2*mZ2*mZ2*Y-xbeta*s*x*(x*x-mZ2*mZ2+Y))*ImE1(st,xt,m)+m/(s4*Y)*(2*m*s4*Y+s*s4*x*x-2*mZ2*mZ2*Y-2*xbeta*s*x*(x*x-mZ2*mZ2+Y))*ImDst(st,xt,m)+2*m/(s4*x1)*(mZ2*(s4+xbeta*s)-2*mZ2*Y/s-xbeta*s*x*(x*x-mZ2*mZ2)/Y)*ImCz(xt,m)+((mZ2*mZ2*(x-u)/(s4*x1*x1)-0.5)*(1+xbeta)+mZ2/s4*(1-2*mZ2*mZ2/(x1*x1))+2*x*xbeta/s4-x*x/(Y*s4)*(s4-xbeta*(x-u)))*ImBz(xt,m);
+     
+     double ima=-4*s2*(Y-s*(s4+beta*(u-t)))/(s4*Y)*ImBz(st,m)+4*s*s2/(s4*Y)*((m+s*(s*s4-Y+mZ2*mZ2)/(2*Y))*(s4+beta*(u-t))-s*s4-mZ2*mZ2)*ImC(st,m)+4*s/Y*((m+(t*t*(t*t-mZ2*mZ2+Y)+u*u*(u*u-mZ2*mZ2+Y)+2*Y*(s2*s2-mZ2*mZ2))/(2*Y*s4))*(s4+beta*(u-t))+mZ2*mZ2-s2*s2)*ImCzz(st,m)+8*m*(m-mZ2*Y/(s*s4))*ImDut(tt,ut,m) +4*(bracket_t+bracket_u);
+     return ima;
 }
 
 
