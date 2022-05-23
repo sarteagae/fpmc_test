@@ -47,6 +47,10 @@ double Itau=-1/2.;
 double fermions_I [9]={ Iup, Idown, Istrange, Icharm, Ibottom, Itop, Ielectron, Imuon,Itau};
 double fermions_Q [9]={ Qup, Qdown, Qstrange, Qcharm, Qbottom, Qtop, Qelectron, Qmuon,Qtau};
 double fermions_m2 [9]={ mup2, mdown2, mstrange2, mcharm2, mbottom2, mtop2, melectron2, mmuon2,mtau2};
+//8 light fermions
+//const double fermions_m2 [8]={mup2,mdown2,mstrange2,mcharm2,mbottom2,melectron2,mmuon2,mtau2};
+//const double fermions_Q [8]={Qup,Qdown,Qstrange,Qcharm,Qbottom,Qelectron,Qmuon,Qtau};
+//const double fermions_I [8]={Iup,Idown,Istrange,Icharm,Ibottom,Ielectron,Imuon,Itau};
 
 
 
@@ -2986,10 +2990,6 @@ double imAaf_pmpm_as(double beta, double t, double u, double m)
 }
 
 
-//8 light fermions
-const double fermions_m2 [8]={mup2,mdown2,mstrange2,mcharm2,mbottom2,melectron2,mmuon2,mtau2};
-const double fermions_Q [8]={Qup,Qdown,Qstrange,Qcharm,Qbottom,Qelectron,Qmuon,Qtau};
-const double fermions_I [8]={Iup,Idown,Istrange,Icharm,Ibottom,Ielectron,Imuon,Itau};
 
 double reFf_pppm_as(double beta, double t)
 {
