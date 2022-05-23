@@ -3388,7 +3388,7 @@ double imFf_pmpm_as(double beta, double t)
      double ga;
      double gv;
      double sum=0;
-     for (int i=0;i<8;i++){
+     for (int i=0;i<size;i++){
          isospin=fermions_I[i];
          charge=fermions_Q[i];
          m2=fermions_m2[i]; 
