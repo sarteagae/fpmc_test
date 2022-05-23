@@ -44,6 +44,10 @@ double Ielectron=-1/2.;
 double Imuon=-1/2.;
 double Itau=-1/2.;
 
+double fermions_I [9]={ Iup, Idown, Istrange, Icharm, Ibottom, Itop, Ielectron, Imuon,Itau};
+double fermions_Q [9]={ Qup, Qdown, Qstrange, Qcharm, Qbottom, Qtop, Qelectron, Qmuon,Qtau};
+double fermions_m2 [9]={ mup2, mdown2, mstrange2, mcharm2, mbottom2, mtop2, melectron2, mmuon2,mtau2};
+
 
 
 
