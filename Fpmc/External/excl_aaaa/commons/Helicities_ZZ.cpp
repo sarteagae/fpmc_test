@@ -3545,6 +3545,7 @@ double dsigma_f(double s, double theta)
 
 
 double dsigma_asymptot(double s, double t,int exclude_loop)
+{
      double beta=pow(1-4*mZ2/(s+0.00001),0.5);
      double u=2*mZ2-s-t;
      
