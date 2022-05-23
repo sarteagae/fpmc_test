@@ -3629,7 +3629,7 @@ double dsigma_ZZ(double s, double t,int exclude_loop)
      {
           return 0;
      }
-     if (s>1000*4*mZ2)//asymptotic regime
+     if (s>20*4*mZ2)//asymptotic regime
      {
           return dsigma_asymptot(s,t,exclude_loop);
      }
