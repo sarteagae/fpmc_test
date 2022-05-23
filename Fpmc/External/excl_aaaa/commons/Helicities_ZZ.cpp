@@ -44,40 +44,9 @@ double Ielectron=-1/2.;
 double Imuon=-1/2.;
 double Itau=-1/2.;
 
-constexpr size_t size = 9;
-double fermions_I[size] {0};
-fermions_I[0] = Iup;
-fermions_I[1] = Idown;
-fermions_I[2] = Istrange;
-fermions_I[3] = Icharm;
-fermions_I[4] = Ibottom;
-fermions_I[5] = Itop;
-fermions_I[6] = Ielectron;
-fermions_I[7] = Imuon;
-fermions_I[8] = Itau;
-
-double fermions_Q[size] {0};
-fermions_Q[0] = Qup;
-fermions_Q[1] = Qdown;
-fermions_Q[2] = Qstrange;
-fermions_Q[3] = Qcharm;
-fermions_Q[4] = Qbottom;
-fermions_Q[5] = Qtop;
-fermions_Q[6] = Qelectron;
-fermions_Q[7] = Qmuon;
-fermions_Q[8] = Qtau;
-
-double fermions_m2[size] {0};
-fermions_m2[0] = mup2;
-fermions_m2[1] = mdown2;
-fermions_m2[2] = mstrange2;
-fermions_m2[3] = mcharm2;
-fermions_m2[4] = mbottom2;
-fermions_m2[5] = mtop2;
-fermions_m2[6] = melectron2;
-fermions_m2[7] = mmuon2;
-fermions_m2[8] = mtau2;
-
+float fermions_I[9]{ Iup, Idown, Istrange, Icharm, Ibottom, Itop, Ielectron, Imuon, Itau};
+float fermions_Q[9]{ Qup, Qdown, Qstrange, Qcharm, Qbottom, Qtop, Qelectron, Qmuon, Qtau};
+float fermions_m2[9]{ mup2, mdown2, mstrange2, mcharm2, mbottom2, mtop2, melectron2, mmuon2, mtau2};
 double reAs_pppm(double beta, double t, double u, double m)
 {
      double s=4*mZ2/(1-beta*beta);
