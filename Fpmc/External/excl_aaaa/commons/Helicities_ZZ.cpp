@@ -3607,7 +3607,9 @@ double dsigma_asymptot(double s, double t,int exclude_loop)
      double sum_Y=F2_ppp0+F2_ppp0_mbeta+F2_pmp0+F2_pmp0_mbeta +F2_ppp0_u+F2_ppp0_mbeta_u+F2_pmp0_u+F2_pmp0_mbeta_u;
 
      double sum=beta/(128.0*s*Pi)*(2*sum_X+2*sum_Z+2*sum_Y);
-     
+}
+
+
 double dsigma_ZZ(double s, double t,int exclude_loop)
 {    
      if (s<4*mZ2)
