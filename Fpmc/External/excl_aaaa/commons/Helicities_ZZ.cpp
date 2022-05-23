@@ -2281,7 +2281,7 @@ double imFw_pmpm_as(double beta, double t, double m)
 //fermion
 //
 
-double reFf_pppm(double beta, double t, double isospin,double charge, double m)
+double reFf_pppm(double beta, double t)
 {
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
@@ -2305,7 +2305,7 @@ double reFf_pppm(double beta, double t, double isospin,double charge, double m)
      return sum;
 }
 
-double imFf_pppm(double beta, double t, double isospin,double charge, double m)
+double imFf_pppm(double beta, double t)
 {
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
@@ -2329,7 +2329,7 @@ double imFf_pppm(double beta, double t, double isospin,double charge, double m)
      return sum;
 }
 
-double reFf_pppp(double beta, double t, double isospin,double charge, double m)
+double reFf_pppp(double beta, double t)
 {
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
@@ -2354,7 +2354,7 @@ double reFf_pppp(double beta, double t, double isospin,double charge, double m)
 }
 
 
-double imFf_pppp(double beta, double t, double isospin,double charge, double m)
+double imFf_pppp(double beta, double t)
 {
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
@@ -2378,7 +2378,7 @@ double imFf_pppp(double beta, double t, double isospin,double charge, double m)
      return sum;
 }
 
-double reFf_pmpp(double beta, double t, double isospin,double charge, double m)
+double reFf_pmpp(double beta, double t)
 {
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
@@ -2402,7 +2402,7 @@ double reFf_pmpp(double beta, double t, double isospin,double charge, double m)
      return sum;
 }
 
-double imFf_pmpp(double beta, double t, double isospin,double charge, double m)
+double imFf_pmpp(double beta, double t)
 {
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
@@ -2426,7 +2426,7 @@ double imFf_pmpp(double beta, double t, double isospin,double charge, double m)
      return sum;
 }
 
-double reFf_pm00(double beta, double t, double isospin,double charge, double m)
+double reFf_pm00(double beta, double t)
 {
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
@@ -2450,7 +2450,7 @@ double reFf_pm00(double beta, double t, double isospin,double charge, double m)
      return sum;
 }
 
-double imFf_pm00(double beta, double t, double isospin,double charge, double m)
+double imFf_pm00(double beta, double t)
 {
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
@@ -2474,7 +2474,7 @@ double imFf_pm00(double beta, double t, double isospin,double charge, double m)
      return sum;
 }
 
-double reFf_pp00(double beta, double t, double isospin,double charge, double m)
+double reFf_pp00(double beta, double t)
 {
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
@@ -2498,7 +2498,7 @@ double reFf_pp00(double beta, double t, double isospin,double charge, double m)
      return sum;
 }
 
-double imFf_pp00(double beta, double t, double isospin,double charge, double m)
+double imFf_pp00(double beta, double t)
 {
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
@@ -2522,7 +2522,7 @@ double imFf_pp00(double beta, double t, double isospin,double charge, double m)
      return sum;
 }
 
-double reFf_ppp0(double beta, double t, double isospin,double charge, double m)
+double reFf_ppp0(double beta, double t)
 {
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
@@ -2546,7 +2546,7 @@ double reFf_ppp0(double beta, double t, double isospin,double charge, double m)
      return sum;
 }
 
-double imFf_ppp0(double beta, double t, double isospin,double charge, double m)
+double imFf_ppp0(double beta, double t)
 {
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
@@ -2570,7 +2570,7 @@ double imFf_ppp0(double beta, double t, double isospin,double charge, double m)
      return sum;
 }
 
-double reFf_pmp0(double beta, double t, double isospin,double charge, double m)
+double reFf_pmp0(double beta, double t)
 {
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
@@ -2594,7 +2594,7 @@ double reFf_pmp0(double beta, double t, double isospin,double charge, double m)
      return sum;
 }
 
-double imFf_pmp0(double beta, double t, double isospin,double charge, double m)
+double imFf_pmp0(double beta, double t)
 {
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
@@ -2618,7 +2618,7 @@ double imFf_pmp0(double beta, double t, double isospin,double charge, double m)
      return sum;
 }
 
-double reFf_pmpm(double beta, double t, double isospin,double charge, double m)
+double reFf_pmpm(double beta, double t)
 {
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
@@ -2642,7 +2642,7 @@ double reFf_pmpm(double beta, double t, double isospin,double charge, double m)
      return sum;
 }
 
-double imFf_pmpm(double beta, double t, double isospin,double charge, double m)
+double imFf_pmpm(double beta, double t)
 {
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
