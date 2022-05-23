@@ -44,6 +44,39 @@ double Ielectron=-1/2.;
 double Imuon=-1/2.;
 double Itau=-1/2.;
 
+constexpr size_t size = 9;
+double fermions_I[size] {0};
+fermions_I[0] = Iup;
+fermions_I[1] = Idown;
+fermions_I[2] = Istrange;
+fermions_I[3] = Icharm;
+fermions_I[4] = Ibottom;
+fermions_I[5] = Itop;
+fermions_I[6] = Ielectron;
+fermions_I[7] = Imuon;
+fermions_I[8] = Itau;
+
+double fermions_Q[size] {0};
+fermions_Q[0] = Qup;
+fermions_Q[1] = Qdown;
+fermions_Q[2] = Qstrange;
+fermions_Q[3] = Qcharm;
+fermions_Q[4] = Qbottom;
+fermions_Q[5] = Qtop;
+fermions_Q[6] = Qelectron;
+fermions_Q[7] = Qmuon;
+fermions_Q[8] = Qtau;
+
+double fermions_m2[size] {0};
+fermions_m2[0] = mup2;
+fermions_m2[1] = mdown2;
+fermions_m2[2] = mstrange2;
+fermions_m2[3] = mcharm2;
+fermions_m2[4] = mbottom2;
+fermions_m2[5] = mtop2;
+fermions_m2[6] = melectron2;
+fermions_m2[7] = mmuon2;
+fermions_m2[8] = mtau2;
 
 double reAs_pppm(double beta, double t, double u, double m)
 {
@@ -3570,31 +3603,31 @@ double dsigma_asymptot(double s, double t,int exclude_loop)
          coeff_Higgs=0;
      }
 
-     double F2_pppp=pow(coeff_W*reFw_pppp_as(beta,t,mW2)+coeff_f*reFf_pppp_as(beta,t)+coeff_f*reFf_pppp_as(beta,t,Itop,Qtop,mtop2),2)+pow(coeff_W*imFw_pppp_as(beta,t,mW2) +coeff_f*imFf_pppp_as(beta,t)+coeff_f*imFf_pppp_as(beta,t,Itop,Qtop,mtop2),2);
+     double F2_pppp=pow(coeff_W*reFw_pppp_as(beta,t,mW2)+coeff_f*reFf_pppp_as(beta,t)+coeff_f*reFf_pppp_as(beta,t),2)+pow(coeff_W*imFw_pppp_as(beta,t,mW2) +coeff_f*imFf_pppp_as(beta,t)+coeff_f*imFf_pppp_as(beta,t),2);
 
-     double F2_pppp_mbeta=pow(coeff_W*reFw_pppp_as(-beta,t,mW2)+coeff_f*reFf_pppp_as(-beta,t)+coeff_f*reFf_pppp_as(-beta,t,Itop,Qtop,mtop2),2)+pow(coeff_W*imFw_pppp_as(-beta,t,mW2)+coeff_f*imFf_pppp_as(-beta,t)+coeff_f*imFf_pppp_as(-beta,t,Itop,Qtop,mtop2),2);
+     double F2_pppp_mbeta=pow(coeff_W*reFw_pppp_as(-beta,t,mW2)+coeff_f*reFf_pppp_as(-beta,t)+coeff_f*reFf_pppp_as(-beta,t),2)+pow(coeff_W*imFw_pppp_as(-beta,t,mW2)+coeff_f*imFf_pppp_as(-beta,t)+coeff_f*imFf_pppp_as(-beta,t),2);
      
-     double F2_pppm=pow(coeff_W*reFw_pppm_as(beta,t,mW2)+coeff_f*reFf_pppm_as(beta,t)+coeff_f*reFf_pppm_as(beta,t,Itop,Qtop,mtop2),2)+pow(coeff_W*imFw_pppm_as(beta,t,mW2)+coeff_f*imFf_pppm_as(beta,t)+coeff_f*imFf_pppm_as(beta,t,Itop,Qtop,mtop2),2);
-     double F2_pppm_mbeta=pow(coeff_W*reFw_pppm_as(-beta,t,mW2)+coeff_f*reFf_pppm_as(-beta,t)+coeff_f*reFf_pppm_as(-beta,t,Itop,Qtop,mtop2),2)+pow(coeff_W*imFw_pppm_as(-beta,t,mW2)+coeff_f*imFf_pppm_as(-beta,t)+coeff_f*imFf_pppm_as(-beta,t,Itop,Qtop,mtop2),2);
+     double F2_pppm=pow(coeff_W*reFw_pppm_as(beta,t,mW2)+coeff_f*reFf_pppm_as(beta,t)+coeff_f*reFf_pppm_as(beta,t),2)+pow(coeff_W*imFw_pppm_as(beta,t,mW2)+coeff_f*imFf_pppm_as(beta,t)+coeff_f*imFf_pppm_as(beta,t),2);
+     double F2_pppm_mbeta=pow(coeff_W*reFw_pppm_as(-beta,t,mW2)+coeff_f*reFf_pppm_as(-beta,t)+coeff_f*reFf_pppm_as(-beta,t),2)+pow(coeff_W*imFw_pppm_as(-beta,t,mW2)+coeff_f*imFf_pppm_as(-beta,t)+coeff_f*imFf_pppm_as(-beta,t),2);
 
-     double F2_pmpm=pow(coeff_W*reFw_pmpm_as(beta,t,mW2)+coeff_f*reFf_pmpm_as(beta,t)+coeff_f*reFf_pmpm_as(beta,t,Itop,Qtop,mtop2),2)+pow(coeff_W*imFw_pmpm_as(beta,t,mW2)+coeff_f*imFf_pmpm_as(beta,t)+coeff_f*imFf_pmpm_as(beta,t,Itop,Qtop,mtop2),2);
-     double F2_pmpm_mbeta=pow(coeff_W*reFw_pmpm_as(-beta,t,mW2)+coeff_f*reFf_pmpm_as(-beta,t)+coeff_f*reFf_pmpm_as(-beta,t,Itop,Qtop,mtop2),2)+pow(coeff_W*imFw_pmpm_as(-beta,t,mW2)+coeff_f*imFf_pmpm_as(-beta,t)+coeff_f*imFf_pmpm_as(-beta,t,Itop,Qtop,mtop2),2);
+     double F2_pmpm=pow(coeff_W*reFw_pmpm_as(beta,t,mW2)+coeff_f*reFf_pmpm_as(beta,t)+coeff_f*reFf_pmpm_as(beta,t),2)+pow(coeff_W*imFw_pmpm_as(beta,t,mW2)+coeff_f*imFf_pmpm_as(beta,t)+coeff_f*imFf_pmpm_as(beta,t),2);
+     double F2_pmpm_mbeta=pow(coeff_W*reFw_pmpm_as(-beta,t,mW2)+coeff_f*reFf_pmpm_as(-beta,t)+coeff_f*reFf_pmpm_as(-beta,t),2)+pow(coeff_W*imFw_pmpm_as(-beta,t,mW2)+coeff_f*imFf_pmpm_as(-beta,t)+coeff_f*imFf_pmpm_as(-beta,t),2);
 
-     double F2_pmpp=pow(coeff_W*reFw_pmpp_as(beta,t,mW2)+coeff_f*reFf_pmpp_as(beta,t)+coeff_f*reFf_pmpp_as(beta,t,Itop,Qtop,mtop2),2)+pow(coeff_W*imFw_pmpp_as(beta,t,mW2)+coeff_f*imFf_pmpp_as(beta,t)+coeff_f*imFf_pmpp_as(beta,t,Itop,Qtop,mtop2),2);
-     double F2_pmpp_mbeta=pow(coeff_W*reFw_pmpp_as(-beta,t,mW2)+coeff_f*reFf_pmpp_as(-beta,t)+coeff_f*reFf_pmpp_as(-beta,t,Itop,Qtop,mtop2),2)+pow(coeff_W*imFw_pmpp_as(-beta,t,mW2)+coeff_f*imFf_pmpp_as(-beta,t)+coeff_f*imFf_pmpp_as(-beta,t,Itop,Qtop,mtop2),2);
+     double F2_pmpp=pow(coeff_W*reFw_pmpp_as(beta,t,mW2)+coeff_f*reFf_pmpp_as(beta,t)+coeff_f*reFf_pmpp_as(beta,t),2)+pow(coeff_W*imFw_pmpp_as(beta,t,mW2)+coeff_f*imFf_pmpp_as(beta,t)+coeff_f*imFf_pmpp_as(beta,t),2);
+     double F2_pmpp_mbeta=pow(coeff_W*reFw_pmpp_as(-beta,t,mW2)+coeff_f*reFf_pmpp_as(-beta,t)+coeff_f*reFf_pmpp_as(-beta,t),2)+pow(coeff_W*imFw_pmpp_as(-beta,t,mW2)+coeff_f*imFf_pmpp_as(-beta,t)+coeff_f*imFf_pmpp_as(-beta,t),2);
 
-     double F2_pp00=pow(coeff_W*reFw_pp00_as(beta,t,mW2)+coeff_f*reFf_pp00_as(beta,t)+coeff_f*reFf_pp00_as(beta,t,Itop,Qtop,mtop2),2)+pow(coeff_W*imFw_pp00_as(beta,t,mW2)+coeff_f*imFf_pp00_as(beta,t)+coeff_f*imFf_pp00_as(beta,t,Itop,Qtop,mtop2),2);
-     double F2_pm00=pow(coeff_W*reFw_pm00_as(beta,t,mW2)+coeff_f*reFf_pm00_as(beta,t)+coeff_f*reFf_pm00_as(beta,t,Itop,Qtop,mtop2),2)+pow(coeff_W*imFw_pm00_as(beta,t,mW2)+coeff_f*imFf_pm00_as(beta,t)+coeff_f*imFf_pm00_as(beta,t,Itop,Qtop,mtop2),2);    
+     double F2_pp00=pow(coeff_W*reFw_pp00_as(beta,t,mW2)+coeff_f*reFf_pp00_as(beta,t)+coeff_f*reFf_pp00_as(beta,t),2)+pow(coeff_W*imFw_pp00_as(beta,t,mW2)+coeff_f*imFf_pp00_as(beta,t)+coeff_f*imFf_pp00_as(beta,t),2);
+     double F2_pm00=pow(coeff_W*reFw_pm00_as(beta,t,mW2)+coeff_f*reFf_pm00_as(beta,t)+coeff_f*reFf_pm00_as(beta,t),2)+pow(coeff_W*imFw_pm00_as(beta,t,mW2)+coeff_f*imFf_pm00_as(beta,t)+coeff_f*imFf_pm00_as(beta,t),2);    
 
-     double F2_ppp0=pow(coeff_W*reFw_ppp0_as(beta,t,mW2)+coeff_f*reFf_ppp0_as(beta,t)+coeff_f*reFf_ppp0_as(beta,t,Itop,Qtop,mtop2),2)+pow(coeff_W*imFw_ppp0_as(beta,t,mW2)+coeff_f*imFf_ppp0_as(beta,t)+coeff_f*imFf_ppp0_as(beta,t,Itop,Qtop,mtop2),2);
-     double F2_ppp0_mbeta=pow(coeff_W*reFw_ppp0_as(-beta,t,mW2)+coeff_f*reFf_ppp0_as(-beta,t)+coeff_f*reFf_ppp0_as(-beta,t,Itop,Qtop,mtop2),2)+pow(coeff_W*imFw_ppp0_as(-beta,t,mW2)+coeff_f*imFf_ppp0_as(-beta,t)+coeff_f*imFf_ppp0_as(-beta,t,Itop,Qtop,mtop2),2);
-     double F2_ppp0_u=pow(coeff_W*reFw_ppp0_as(beta,u,mW2)+coeff_f*reFf_ppp0_as(beta,u)+coeff_f*reFf_ppp0_as(beta,u,Itop,Qtop,mtop2),2)+pow(coeff_W*imFw_ppp0_as(beta,u,mW2)+coeff_f*imFf_ppp0_as(beta,u)+coeff_f*imFf_ppp0_as(beta,u,Itop,Qtop,mtop2),2);
-     double F2_ppp0_mbeta_u=pow(coeff_W*reFw_ppp0_as(-beta,u,mW2)+coeff_f*reFf_ppp0_as(-beta,u)+coeff_f*reFf_ppp0_as(-beta,u,Itop,Qtop,mtop2),2)+pow(coeff_W*imFw_ppp0_as(-beta,u,mW2)+coeff_f*imFf_ppp0_as(-beta,u)+coeff_f*imFf_ppp0_as(-beta,u,Itop,Qtop,mtop2),2);
+     double F2_ppp0=pow(coeff_W*reFw_ppp0_as(beta,t,mW2)+coeff_f*reFf_ppp0_as(beta,t)+coeff_f*reFf_ppp0_as(beta,t),2)+pow(coeff_W*imFw_ppp0_as(beta,t,mW2)+coeff_f*imFf_ppp0_as(beta,t)+coeff_f*imFf_ppp0_as(beta,t),2);
+     double F2_ppp0_mbeta=pow(coeff_W*reFw_ppp0_as(-beta,t,mW2)+coeff_f*reFf_ppp0_as(-beta,t)+coeff_f*reFf_ppp0_as(-beta,t),2)+pow(coeff_W*imFw_ppp0_as(-beta,t,mW2)+coeff_f*imFf_ppp0_as(-beta,t)+coeff_f*imFf_ppp0_as(-beta,t),2);
+     double F2_ppp0_u=pow(coeff_W*reFw_ppp0_as(beta,u,mW2)+coeff_f*reFf_ppp0_as(beta,u)+coeff_f*reFf_ppp0_as(beta,u),2)+pow(coeff_W*imFw_ppp0_as(beta,u,mW2)+coeff_f*imFf_ppp0_as(beta,u)+coeff_f*imFf_ppp0_as(beta,u),2);
+     double F2_ppp0_mbeta_u=pow(coeff_W*reFw_ppp0_as(-beta,u,mW2)+coeff_f*reFf_ppp0_as(-beta,u)+coeff_f*reFf_ppp0_as(-beta,u),2)+pow(coeff_W*imFw_ppp0_as(-beta,u,mW2)+coeff_f*imFf_ppp0_as(-beta,u)+coeff_f*imFf_ppp0_as(-beta,u),2);
 
-     double F2_pmp0=pow(coeff_W*reFw_pmp0_as(beta,t,mW2)+coeff_f*reFf_pmp0_as(beta,t)+coeff_f*reFf_pmp0_as(beta,t,Itop,Qtop,mtop2),2)+pow(coeff_W*imFw_pmp0_as(beta,t,mW2)+coeff_f*imFf_pmp0_as(beta,t)+coeff_f*imFf_pmp0_as(beta,t,Itop,Qtop,mtop2),2);
-     double F2_pmp0_mbeta=pow(coeff_W*reFw_pmp0_as(-beta,t,mW2)+coeff_f*reFf_pmp0_as(-beta,t)+coeff_f*reFf_pmp0_as(-beta,t,Itop,Qtop,mtop2),2)+pow(coeff_W*imFw_pmp0_as(-beta,t,mW2)+coeff_f*imFf_pmp0_as(-beta,t)+coeff_f*imFf_pmp0_as(-beta,t,Itop,Qtop,mtop2),2);
-     double F2_pmp0_u=pow(coeff_W*reFw_pmp0_as(beta,u,mW2)+coeff_f*reFf_pmp0_as(beta,u)+coeff_f*reFf_pmp0_as(beta,u,Itop,Qtop,mtop2),2)+pow(coeff_W*imFw_pmp0_as(beta,u,mW2)+coeff_f*imFf_pmp0_as(beta,u)+coeff_f*imFf_pmp0_as(beta,u,Itop,Qtop,mtop2),2);
-     double F2_pmp0_mbeta_u=pow(coeff_W*reFw_pmp0_as(-beta,u,mW2)+coeff_f*reFf_pmp0_as(-beta,u)+coeff_f*reFf_pmp0_as(-beta,u,Itop,Qtop,mtop2),2)+pow(coeff_W*imFw_pmp0_as(-beta,u,mW2)+coeff_f*imFf_pmp0_as(-beta,u)+coeff_f*imFf_pmp0_as(-beta,u,Itop,Qtop,mtop2),2);
+     double F2_pmp0=pow(coeff_W*reFw_pmp0_as(beta,t,mW2)+coeff_f*reFf_pmp0_as(beta,t)+coeff_f*reFf_pmp0_as(beta,t),2)+pow(coeff_W*imFw_pmp0_as(beta,t,mW2)+coeff_f*imFf_pmp0_as(beta,t)+coeff_f*imFf_pmp0_as(beta,t),2);
+     double F2_pmp0_mbeta=pow(coeff_W*reFw_pmp0_as(-beta,t,mW2)+coeff_f*reFf_pmp0_as(-beta,t)+coeff_f*reFf_pmp0_as(-beta,t),2)+pow(coeff_W*imFw_pmp0_as(-beta,t,mW2)+coeff_f*imFf_pmp0_as(-beta,t)+coeff_f*imFf_pmp0_as(-beta,t),2);
+     double F2_pmp0_u=pow(coeff_W*reFw_pmp0_as(beta,u,mW2)+coeff_f*reFf_pmp0_as(beta,u)+coeff_f*reFf_pmp0_as(beta,u),2)+pow(coeff_W*imFw_pmp0_as(beta,u,mW2)+coeff_f*imFf_pmp0_as(beta,u)+coeff_f*imFf_pmp0_as(beta,u),2);
+     double F2_pmp0_mbeta_u=pow(coeff_W*reFw_pmp0_as(-beta,u,mW2)+coeff_f*reFf_pmp0_as(-beta,u)+coeff_f*reFf_pmp0_as(-beta,u),2)+pow(coeff_W*imFw_pmp0_as(-beta,u,mW2)+coeff_f*imFf_pmp0_as(-beta,u)+coeff_f*imFf_pmp0_as(-beta,u),2);
 
      double sum_X=F2_pppp+F2_pppp_mbeta+F2_pppm+F2_pppm_mbeta+F2_pmpp+F2_pmpp_mbeta+F2_pmpm+F2_pmpm_mbeta;
      double sum_Z=F2_pp00+F2_pm00;
