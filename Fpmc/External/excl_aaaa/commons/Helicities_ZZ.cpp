@@ -2250,146 +2250,387 @@ double imFw_pmpm_as(double beta, double t, double m)
 
 double reFf_pppm(double beta, double t, double isospin,double charge, double m)
 {
-     double gv= (isospin-2*charge*sW*sW)/(2*sW*cW);
-     double ga=isospin/(2*cW*sW);
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
-     return alpha*alpha*charge*charge*(ga*ga*reAaf_pppm(beta,t,u,m)+gv*gv*reAvf_pppm(beta,t,u,m));
+     
+     double isospin;
+     double m2;
+     double charge;
+
+     double ga;
+     double gv;
+     double sum=0;
+     for (int i=0;i<8;i++){
+         isospin=fermions_I[i];
+         charge=fermions_Q[i];
+         m2=fermions_m2[i]; 
+
+         ga=isospin/(2*cW*sW);
+         gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*reAaf_pppm(beta,t,u,m)+gv*gv*reAvf_pppm(beta,t,u,m));
+     }
+     return sum;
 }
 
 double imFf_pppm(double beta, double t, double isospin,double charge, double m)
 {
-     double gv= (isospin-2*charge*sW*sW)/(2*sW*cW);
-     double ga=isospin/(2*cW*sW);
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
-     return alpha*alpha*charge*charge*(ga*ga*imAaf_pppm(beta,t,u,m)+gv*gv*imAvf_pppm(beta,t,u,m));
+     
+     double isospin;
+     double m2;
+     double charge;
+
+     double ga;
+     double gv;
+     double sum=0;
+     for (int i=0;i<8;i++){
+         isospin=fermions_I[i];
+         charge=fermions_Q[i];
+         m2=fermions_m2[i]; 
+
+         ga=isospin/(2*cW*sW);
+         gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*imAaf_pppm(beta,t,u,m)+gv*gv*imAvf_pppm(beta,t,u,m));
+     }
+     return sum;
 }
 
 double reFf_pppp(double beta, double t, double isospin,double charge, double m)
 {
-     double gv= (isospin-2*charge*sW*sW)/(2*sW*cW);
-     double ga=isospin/(2*cW*sW);
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
-     return alpha*alpha*charge*charge*(ga*ga*reAaf_pppp(beta,t,u,m)+gv*gv*reAvf_pppp(beta,t,u,m));
+     
+     double isospin;
+     double m2;
+     double charge;
+
+     double ga;
+     double gv;
+     double sum=0;
+     for (int i=0;i<8;i++){
+         isospin=fermions_I[i];
+         charge=fermions_Q[i];
+         m2=fermions_m2[i]; 
+
+         ga=isospin/(2*cW*sW);
+         gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*reAaf_pppp(beta,t,u,m)+gv*gv*reAvf_pppp(beta,t,u,m));
+     }
+     return sum;
 }
+
 
 double imFf_pppp(double beta, double t, double isospin,double charge, double m)
 {
-     double gv= (isospin-2*charge*sW*sW)/(2*sW*cW);
-     double ga=isospin/(2*cW*sW);
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
-     return alpha*alpha*charge*charge*(ga*ga*imAaf_pppp(beta,t,u,m)+gv*gv*imAvf_pppp(beta,t,u,m));
+     
+     double isospin;
+     double m2;
+     double charge;
+
+     double ga;
+     double gv;
+     double sum=0;
+     for (int i=0;i<8;i++){
+         isospin=fermions_I[i];
+         charge=fermions_Q[i];
+         m2=fermions_m2[i]; 
+
+         ga=isospin/(2*cW*sW);
+         gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*imAaf_pppp(beta,t,u,m)+gv*gv*imAvf_pppp(beta,t,u,m));
+     }
+     return sum;
 }
 
 double reFf_pmpp(double beta, double t, double isospin,double charge, double m)
 {
-     double gv= (isospin-2*charge*sW*sW)/(2*sW*cW);
-     double ga=isospin/(2*cW*sW);
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
-     return alpha*alpha*charge*charge*(ga*ga*reAaf_pmpp(beta,t,u,m)+gv*gv*reAvf_pmpp(beta,t,u,m));
+     
+     double isospin;
+     double m2;
+     double charge;
+
+     double ga;
+     double gv;
+     double sum=0;
+     for (int i=0;i<8;i++){
+         isospin=fermions_I[i];
+         charge=fermions_Q[i];
+         m2=fermions_m2[i]; 
+
+         ga=isospin/(2*cW*sW);
+         gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*reAaf_pmpp(beta,t,u,m)+gv*gv*reAvf_pmpp(beta,t,u,m));
+     }
+     return sum;
 }
 
 double imFf_pmpp(double beta, double t, double isospin,double charge, double m)
 {
-     double gv= (isospin-2*charge*sW*sW)/(2*sW*cW);
-     double ga=isospin/(2*cW*sW);
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
-     return alpha*alpha*charge*charge*(ga*ga*imAaf_pmpp(beta,t,u,m)+gv*gv*imAvf_pmpp(beta,t,u,m));
+     
+     double isospin;
+     double m2;
+     double charge;
+
+     double ga;
+     double gv;
+     double sum=0;
+     for (int i=0;i<8;i++){
+         isospin=fermions_I[i];
+         charge=fermions_Q[i];
+         m2=fermions_m2[i]; 
+
+         ga=isospin/(2*cW*sW);
+         gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*imAaf_pmpp(beta,t,u,m)+gv*gv*imAvf_pmpp(beta,t,u,m));
+     }
+     return sum;
 }
 
 double reFf_pm00(double beta, double t, double isospin,double charge, double m)
 {
-     double gv= (isospin-2*charge*sW*sW)/(2*sW*cW);
-     double ga=isospin/(2*cW*sW);
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
-     return alpha*alpha*charge*charge*(ga*ga*reAaf_pm00(beta,t,u,m)+gv*gv*reAvf_pm00(beta,t,u,m));
+     
+     double isospin;
+     double m2;
+     double charge;
+
+     double ga;
+     double gv;
+     double sum=0;
+     for (int i=0;i<8;i++){
+         isospin=fermions_I[i];
+         charge=fermions_Q[i];
+         m2=fermions_m2[i]; 
+
+         ga=isospin/(2*cW*sW);
+         gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*reAaf_pm00(beta,t,u,m)+gv*gv*reAvf_pm00(beta,t,u,m));
+     }
+     return sum;
 }
 
 double imFf_pm00(double beta, double t, double isospin,double charge, double m)
 {
-     double gv= (isospin-2*charge*sW*sW)/(2*sW*cW);
-     double ga=isospin/(2*cW*sW);
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
-     return alpha*alpha*charge*charge*(ga*ga*imAaf_pm00(beta,t,u,m)+gv*gv*imAvf_pm00(beta,t,u,m));
+     
+     double isospin;
+     double m2;
+     double charge;
+
+     double ga;
+     double gv;
+     double sum=0;
+     for (int i=0;i<8;i++){
+         isospin=fermions_I[i];
+         charge=fermions_Q[i];
+         m2=fermions_m2[i]; 
+
+         ga=isospin/(2*cW*sW);
+         gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*imAaf_pm00(beta,t,u,m)+gv*gv*imAvf_pm00(beta,t,u,m));
+     }
+     return sum;
 }
 
 double reFf_pp00(double beta, double t, double isospin,double charge, double m)
 {
-     double gv= (isospin-2*charge*sW*sW)/(2*sW*cW);
-     double ga=isospin/(2*cW*sW);
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
-     return alpha*alpha*charge*charge*(ga*ga*reAaf_pp00(beta,t,u,m)+gv*gv*reAvf_pp00(beta,t,u,m));
+     
+     double isospin;
+     double m2;
+     double charge;
+
+     double ga;
+     double gv;
+     double sum=0;
+     for (int i=0;i<8;i++){
+         isospin=fermions_I[i];
+         charge=fermions_Q[i];
+         m2=fermions_m2[i]; 
+
+         ga=isospin/(2*cW*sW);
+         gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*reAaf_pp00(beta,t,u,m)+gv*gv*reAvf_pp00(beta,t,u,m));
+     }
+     return sum;
 }
 
 double imFf_pp00(double beta, double t, double isospin,double charge, double m)
 {
-     double gv= (isospin-2*charge*sW*sW)/(2*sW*cW);
-     double ga=isospin/(2*cW*sW);
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
-     return alpha*alpha*charge*charge*(ga*ga*imAaf_pp00(beta,t,u,m)+gv*gv*imAvf_pp00(beta,t,u,m));
+     
+     double isospin;
+     double m2;
+     double charge;
+
+     double ga;
+     double gv;
+     double sum=0;
+     for (int i=0;i<8;i++){
+         isospin=fermions_I[i];
+         charge=fermions_Q[i];
+         m2=fermions_m2[i]; 
+
+         ga=isospin/(2*cW*sW);
+         gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*imAaf_pp00(beta,t,u,m)+gv*gv*imAvf_pp00(beta,t,u,m));
+     }
+     return sum;
 }
 
 double reFf_ppp0(double beta, double t, double isospin,double charge, double m)
 {
-     double gv= (isospin-2*charge*sW*sW)/(2*sW*cW);
-     double ga=isospin/(2*cW*sW);
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
-     return alpha*alpha*charge*charge*(ga*ga*reAaf_ppp0(beta,t,u,m)+gv*gv*reAvf_ppp0(beta,t,u,m));
+     
+     double isospin;
+     double m2;
+     double charge;
+
+     double ga;
+     double gv;
+     double sum=0;
+     for (int i=0;i<8;i++){
+         isospin=fermions_I[i];
+         charge=fermions_Q[i];
+         m2=fermions_m2[i]; 
+
+         ga=isospin/(2*cW*sW);
+         gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*reAaf_ppp0(beta,t,u,m)+gv*gv*reAvf_ppp0(beta,t,u,m));
+     }
+     return sum;
 }
 
 double imFf_ppp0(double beta, double t, double isospin,double charge, double m)
 {
-     double gv= (isospin-2*charge*sW*sW)/(2*sW*cW);
-     double ga=isospin/(2*cW*sW);
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
-     return alpha*alpha*charge*charge*(ga*ga*imAaf_ppp0(beta,t,u,m)+gv*gv*imAvf_ppp0(beta,t,u,m));
+     
+     double isospin;
+     double m2;
+     double charge;
+
+     double ga;
+     double gv;
+     double sum=0;
+     for (int i=0;i<8;i++){
+         isospin=fermions_I[i];
+         charge=fermions_Q[i];
+         m2=fermions_m2[i]; 
+
+         ga=isospin/(2*cW*sW);
+         gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*imAaf_ppp0(beta,t,u,m)+gv*gv*imAvf_ppp0(beta,t,u,m));
+     }
+     return sum;
 }
 
 double reFf_pmp0(double beta, double t, double isospin,double charge, double m)
 {
-     double gv= (isospin-2*charge*sW*sW)/(2*sW*cW);
-     double ga=isospin/(2*cW*sW);
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
-     return alpha*alpha*charge*charge*(ga*ga*reAaf_pmp0(beta,t,u,m)+gv*gv*reAvf_pmp0(beta,t,u,m));
+     
+     double isospin;
+     double m2;
+     double charge;
+
+     double ga;
+     double gv;
+     double sum=0;
+     for (int i=0;i<8;i++){
+         isospin=fermions_I[i];
+         charge=fermions_Q[i];
+         m2=fermions_m2[i]; 
+
+         ga=isospin/(2*cW*sW);
+         gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*reAaf_pmp0(beta,t,u,m)+gv*gv*reAvf_pmp0(beta,t,u,m));
+     }
+     return sum;
 }
 
 double imFf_pmp0(double beta, double t, double isospin,double charge, double m)
 {
-     double gv= (isospin-2*charge*sW*sW)/(2*sW*cW);
-     double ga=isospin/(2*cW*sW);
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
-     return alpha*alpha*charge*charge*(ga*ga*imAaf_pmp0(beta,t,u,m)+gv*gv*imAvf_pmp0(beta,t,u,m));
+     
+     double isospin;
+     double m2;
+     double charge;
+
+     double ga;
+     double gv;
+     double sum=0;
+     for (int i=0;i<8;i++){
+         isospin=fermions_I[i];
+         charge=fermions_Q[i];
+         m2=fermions_m2[i]; 
+
+         ga=isospin/(2*cW*sW);
+         gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*imAaf_pmp0(beta,t,u,m)+gv*gv*imAvf_pmp0(beta,t,u,m));
+     }
+     return sum;
 }
 
 double reFf_pmpm(double beta, double t, double isospin,double charge, double m)
 {
-     double gv= (isospin-2*charge*sW*sW)/(2*sW*cW);
-     double ga=isospin/(2*cW*sW);
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
-     return alpha*alpha*charge*charge*(ga*ga*reAaf_pmpm(beta,t,u,m)+gv*gv*reAvf_pmpm(beta,t,u,m));
+     
+     double isospin;
+     double m2;
+     double charge;
+
+     double ga;
+     double gv;
+     double sum=0;
+     for (int i=0;i<8;i++){
+         isospin=fermions_I[i];
+         charge=fermions_Q[i];
+         m2=fermions_m2[i]; 
+
+         ga=isospin/(2*cW*sW);
+         gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*reAaf_pmpm(beta,t,u,m)+gv*gv*reAvf_pmpm(beta,t,u,m));
+     }
+     return sum;
 }
 
 double imFf_pmpm(double beta, double t, double isospin,double charge, double m)
 {
-     double gv= (isospin-2*charge*sW*sW)/(2*sW*cW);
-     double ga=isospin/(2*cW*sW);
      double s=4*mZ2/(1-beta*beta);
      double u=2*mZ2-s-t;
-     return alpha*alpha*charge*charge*(ga*ga*imAaf_pmpm(beta,t,u,m)+gv*gv*imAvf_pmpm(beta,t,u,m));
+     
+     double isospin;
+     double m2;
+     double charge;
+
+     double ga;
+     double gv;
+     double sum=0;
+     for (int i=0;i<8;i++){
+         isospin=fermions_I[i];
+         charge=fermions_Q[i];
+         m2=fermions_m2[i]; 
+
+         ga=isospin/(2*cW*sW);
+         gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*imAaf_pmpm(beta,t,u,m)+gv*gv*imAvf_pmpm(beta,t,u,m));
+     }
+     return sum;
 }
 
 //asymptot fermion
