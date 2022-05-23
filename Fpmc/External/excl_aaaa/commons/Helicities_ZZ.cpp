@@ -44,9 +44,7 @@ double Ielectron=-1/2.;
 double Imuon=-1/2.;
 double Itau=-1/2.;
 
-float fermions_I[9]{ Iup, Idown, Istrange, Icharm, Ibottom, Itop, Ielectron, Imuon, Itau};
-float fermions_Q[9]{ Qup, Qdown, Qstrange, Qcharm, Qbottom, Qtop, Qelectron, Qmuon, Qtau};
-float fermions_m2[9]{ mup2, mdown2, mstrange2, mcharm2, mbottom2, mtop2, melectron2, mmuon2, mtau2};
+
 double reAs_pppm(double beta, double t, double u, double m)
 {
      double s=4*mZ2/(1-beta*beta);
@@ -2269,7 +2267,7 @@ double reFf_pppm(double beta, double t)
 
          ga=isospin/(2*cW*sW);
          gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
-         sum=sum+alpha*alpha*charge*charge*(ga*ga*reAaf_pppm(beta,t,u,m)+gv*gv*reAvf_pppm(beta,t,u,m));
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*reAaf_pppm(beta,t,u,m2)+gv*gv*reAvf_pppm(beta,t,u,m2));
      }
      return sum;
 }
@@ -2293,7 +2291,7 @@ double imFf_pppm(double beta, double t)
 
          ga=isospin/(2*cW*sW);
          gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
-         sum=sum+alpha*alpha*charge*charge*(ga*ga*imAaf_pppm(beta,t,u,m)+gv*gv*imAvf_pppm(beta,t,u,m));
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*imAaf_pppm(beta,t,u,m2)+gv*gv*imAvf_pppm(beta,t,u,m2));
      }
      return sum;
 }
@@ -2317,7 +2315,7 @@ double reFf_pppp(double beta, double t)
 
          ga=isospin/(2*cW*sW);
          gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
-         sum=sum+alpha*alpha*charge*charge*(ga*ga*reAaf_pppp(beta,t,u,m)+gv*gv*reAvf_pppp(beta,t,u,m));
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*reAaf_pppp(beta,t,u,m2)+gv*gv*reAvf_pppp(beta,t,u,m2));
      }
      return sum;
 }
@@ -2342,7 +2340,7 @@ double imFf_pppp(double beta, double t)
 
          ga=isospin/(2*cW*sW);
          gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
-         sum=sum+alpha*alpha*charge*charge*(ga*ga*imAaf_pppp(beta,t,u,m)+gv*gv*imAvf_pppp(beta,t,u,m));
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*imAaf_pppp(beta,t,u,m2)+gv*gv*imAvf_pppp(beta,t,u,m2));
      }
      return sum;
 }
@@ -2366,7 +2364,7 @@ double reFf_pmpp(double beta, double t)
 
          ga=isospin/(2*cW*sW);
          gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
-         sum=sum+alpha*alpha*charge*charge*(ga*ga*reAaf_pmpp(beta,t,u,m)+gv*gv*reAvf_pmpp(beta,t,u,m));
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*reAaf_pmpp(beta,t,u,m2)+gv*gv*reAvf_pmpp(beta,t,u,m2));
      }
      return sum;
 }
@@ -2390,7 +2388,7 @@ double imFf_pmpp(double beta, double t)
 
          ga=isospin/(2*cW*sW);
          gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
-         sum=sum+alpha*alpha*charge*charge*(ga*ga*imAaf_pmpp(beta,t,u,m)+gv*gv*imAvf_pmpp(beta,t,u,m));
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*imAaf_pmpp(beta,t,u,m2)+gv*gv*imAvf_pmpp(beta,t,u,m2));
      }
      return sum;
 }
@@ -2414,7 +2412,7 @@ double reFf_pm00(double beta, double t)
 
          ga=isospin/(2*cW*sW);
          gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
-         sum=sum+alpha*alpha*charge*charge*(ga*ga*reAaf_pm00(beta,t,u,m)+gv*gv*reAvf_pm00(beta,t,u,m));
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*reAaf_pm00(beta,t,u,m2)+gv*gv*reAvf_pm00(beta,t,u,m2));
      }
      return sum;
 }
@@ -2438,7 +2436,7 @@ double imFf_pm00(double beta, double t)
 
          ga=isospin/(2*cW*sW);
          gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
-         sum=sum+alpha*alpha*charge*charge*(ga*ga*imAaf_pm00(beta,t,u,m)+gv*gv*imAvf_pm00(beta,t,u,m));
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*imAaf_pm00(beta,t,u,m2)+gv*gv*imAvf_pm00(beta,t,u,m2));
      }
      return sum;
 }
@@ -2462,7 +2460,7 @@ double reFf_pp00(double beta, double t)
 
          ga=isospin/(2*cW*sW);
          gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
-         sum=sum+alpha*alpha*charge*charge*(ga*ga*reAaf_pp00(beta,t,u,m)+gv*gv*reAvf_pp00(beta,t,u,m));
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*reAaf_pp00(beta,t,u,m2)+gv*gv*reAvf_pp00(beta,t,u,m2));
      }
      return sum;
 }
@@ -2486,7 +2484,7 @@ double imFf_pp00(double beta, double t)
 
          ga=isospin/(2*cW*sW);
          gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
-         sum=sum+alpha*alpha*charge*charge*(ga*ga*imAaf_pp00(beta,t,u,m)+gv*gv*imAvf_pp00(beta,t,u,m));
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*imAaf_pp00(beta,t,u,m2)+gv*gv*imAvf_pp00(beta,t,u,m2));
      }
      return sum;
 }
@@ -2510,7 +2508,7 @@ double reFf_ppp0(double beta, double t)
 
          ga=isospin/(2*cW*sW);
          gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
-         sum=sum+alpha*alpha*charge*charge*(ga*ga*reAaf_ppp0(beta,t,u,m)+gv*gv*reAvf_ppp0(beta,t,u,m));
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*reAaf_ppp0(beta,t,u,m2)+gv*gv*reAvf_ppp0(beta,t,u,m2));
      }
      return sum;
 }
@@ -2534,7 +2532,7 @@ double imFf_ppp0(double beta, double t)
 
          ga=isospin/(2*cW*sW);
          gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
-         sum=sum+alpha*alpha*charge*charge*(ga*ga*imAaf_ppp0(beta,t,u,m)+gv*gv*imAvf_ppp0(beta,t,u,m));
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*imAaf_ppp0(beta,t,u,m2)+gv*gv*imAvf_ppp0(beta,t,u,m2));
      }
      return sum;
 }
@@ -2558,7 +2556,7 @@ double reFf_pmp0(double beta, double t)
 
          ga=isospin/(2*cW*sW);
          gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
-         sum=sum+alpha*alpha*charge*charge*(ga*ga*reAaf_pmp0(beta,t,u,m)+gv*gv*reAvf_pmp0(beta,t,u,m));
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*reAaf_pmp0(beta,t,u,m2)+gv*gv*reAvf_pmp0(beta,t,u,m2));
      }
      return sum;
 }
@@ -2582,7 +2580,7 @@ double imFf_pmp0(double beta, double t)
 
          ga=isospin/(2*cW*sW);
          gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
-         sum=sum+alpha*alpha*charge*charge*(ga*ga*imAaf_pmp0(beta,t,u,m)+gv*gv*imAvf_pmp0(beta,t,u,m));
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*imAaf_pmp0(beta,t,u,m2)+gv*gv*imAvf_pmp0(beta,t,u,m2));
      }
      return sum;
 }
@@ -2606,7 +2604,7 @@ double reFf_pmpm(double beta, double t)
 
          ga=isospin/(2*cW*sW);
          gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
-         sum=sum+alpha*alpha*charge*charge*(ga*ga*reAaf_pmpm(beta,t,u,m)+gv*gv*reAvf_pmpm(beta,t,u,m));
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*reAaf_pmpm(beta,t,u,m2)+gv*gv*reAvf_pmpm(beta,t,u,m2));
      }
      return sum;
 }
@@ -2630,7 +2628,7 @@ double imFf_pmpm(double beta, double t)
 
          ga=isospin/(2*cW*sW);
          gv=(isospin-2*charge*sW*sW)/(2*sW*cW);
-         sum=sum+alpha*alpha*charge*charge*(ga*ga*imAaf_pmpm(beta,t,u,m)+gv*gv*imAvf_pmpm(beta,t,u,m));
+         sum=sum+alpha*alpha*charge*charge*(ga*ga*imAaf_pmpm(beta,t,u,m2)+gv*gv*imAvf_pmpm(beta,t,u,m2));
      }
      return sum;
 }
