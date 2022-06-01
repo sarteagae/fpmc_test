@@ -4,7 +4,6 @@
 
 #include "functions_ZZ.h"
 
-
 const double Pi=4*atan(1);
 const double mW2=80.4*80.4+0.0001;// everything is up to power 2
 const double mZ2=91.2*91.2+0.0001;
